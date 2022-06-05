@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4452B098284D78E400582136 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 4452B097284D78E400582136 /* Shimmer */; };
 		446D5C63284D106A00628FB6 /* BaseStationLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D5C62284D106A00628FB6 /* BaseStationLabApp.swift */; };
 		446D5C67284D106A00628FB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446D5C66284D106A00628FB6 /* Assets.xcassets */; };
 		446D5C6A284D106A00628FB6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446D5C69284D106A00628FB6 /* Preview Assets.xcassets */; };
@@ -98,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4452B098284D78E400582136 /* Shimmer in Frameworks */,
 				860E32D4CC204605DBE3C84A /* Pods_BaseStationLab.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +333,9 @@
 			dependencies = (
 			);
 			name = BaseStationLab;
+			packageProductDependencies = (
+				4452B097284D78E400582136 /* Shimmer */,
+			);
 			productName = BaseStationLab;
 			productReference = 446D5C5F284D106A00628FB6 /* BaseStationLab.app */;
 			productType = "com.apple.product-type.application";
@@ -359,6 +364,9 @@
 				Base,
 			);
 			mainGroup = 446D5C56284D106A00628FB6;
+			packageReferences = (
+				4452B096284D78E400582136 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+			);
 			productRefGroup = 446D5C60284D106A00628FB6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -665,6 +673,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4452B096284D78E400582136 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4452B097284D78E400582136 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4452B096284D78E400582136 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 446D5C57284D106A00628FB6 /* Project object */;
 }

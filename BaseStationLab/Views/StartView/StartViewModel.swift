@@ -14,7 +14,8 @@ class StartViewModel: ObservableObject {
         updateCurrentTechnolody()
     }}
     @Published var currentDetailTechnolody = DetailTechology.all
-    @Published var showingFilterSheet = false 
+    @Published var showingFilterSheet = false
+    @Published var isLoading = true
     
     private var currentTecholodyFilter: String {
         guard currentDetailTechnolody != .all else { return currentTechology.filterValue }
@@ -30,6 +31,8 @@ class StartViewModel: ObservableObject {
     }
     
     public func getProviderModels() {
+        DispatchQueue.main.async { self.isLoading = true }
+        
         database.getBases { [weak self] bases in
             guard let self = self, !bases.isEmpty else { return }
             let filteredBases = bases.filteredBy(technology: self.currentTecholodyFilter)
@@ -41,6 +44,7 @@ class StartViewModel: ObservableObject {
             
             DispatchQueue.main.async {
                 self.providerModels = preparedProviderModels
+                self.isLoading = false
             }
         }
     }

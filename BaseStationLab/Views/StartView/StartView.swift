@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct StartView: View {
     @StateObject var navigationController = NavigationController.shared
@@ -35,6 +36,7 @@ struct StartView: View {
                     navigationController.openRegions(provider: providerModel.provider)
                 } label: {
                     StartViewCell(model: providerModel)
+                        .shimmering(active: viewModel.isLoading, duration: 1, bounce: false)
                 }
             }
         }
