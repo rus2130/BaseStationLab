@@ -9,18 +9,20 @@ import SwiftUI
 
 @main
 struct BaseStationLabApp: App {
-    
-    init() {
-        BasesController().checkBasesStatus()
-    }
+    @StateObject private var startViewModel = StartViewModel()
     
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                StartView()
+                StartView(viewModel: startViewModel)
                     .frame(maxWidth: 500)
             }
             .navigationViewStyle(StackNavigationViewStyle())
+            .onAppear {
+                BasesController().checkBasesStatus {
+                    startViewModel.getProviderModels()
+                }
+            }
         }
     }
 }

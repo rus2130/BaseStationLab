@@ -10,15 +10,17 @@ import Foundation
 class BasesController {
     let database = Database()
     
-    public func checkBasesStatus() {
+    public func checkBasesStatus(completion: @escaping () -> ()) {
         database.getBasesCount { basesCount in
             if basesCount == 0 {
-                self.startParse()
+                self.startParse(completion: completion)
+            } else {
+                completion()
             }
         }
     }
     
-    private func startParse() {
+    private func startParse(completion: @escaping () -> ()) {
         Task {
             var bases = [[String]]()
             
@@ -28,12 +30,12 @@ class BasesController {
                 bases.append(contentsOf: await parser.startParse())
             }
             
-            updateDatabase(data: bases)
+            updateDatabase(data: bases, completion: completion)
         }
     }
     
-    private func updateDatabase(data: [[String]]) {
+    private func updateDatabase(data: [[String]], completion: @escaping () -> ()) {
         let bases = ParseMapper.getBaseStationsFrom(data: data)
-        database.save(baseStations: bases)
+        database.save(baseStations: bases, completion: completion)
     }
 }

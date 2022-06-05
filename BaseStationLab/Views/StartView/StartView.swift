@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StartView: View {
     @StateObject var navigationController = NavigationController.shared
-    @StateObject var viewModel = StartViewModel()
+    @StateObject var viewModel: StartViewModel
     
     var body: some View {
         ScrollView(.vertical) {
@@ -98,7 +98,7 @@ struct StartView: View {
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-        StartView()
+        StartView(viewModel: .init())
             .previewDevice("iPhone 12")
     }
 }

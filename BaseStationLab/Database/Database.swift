@@ -13,7 +13,7 @@ class Database {
         
     private var writeGroup = DispatchGroup()
     
-    public func save(baseStations: [BaseStation]) {
+    public func save(baseStations: [BaseStation], completion: (() -> ())? = nil) {
         Database.realmAsyncQueue.async { [self] in
             let asyncRealm = try! Realm()
             
@@ -22,6 +22,9 @@ class Database {
                 try asyncRealm.write {
                     asyncRealm.add(baseStations, update: .modified)
                     writeGroup.leave()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        completion?()
+                    }
                 }
                 writeGroup.wait()
             } catch {

@@ -24,10 +24,6 @@ class StartViewModel: ObservableObject {
     
     private let database = Database()
     
-    init() {
-        getProviderModels()
-    }
-    
     public func updateDetailTechnolody(technolody: DetailTechology) {
         currentDetailTechnolody = technolody
         getProviderModels()
