@@ -11,6 +11,7 @@ import RealmSwift
 class SettlementsViewModel: ObservableObject {
     @Published var settlementModels = [SettlementCellModel]()
     @Published var showingFilterActionSheet = false
+    @Published var showingSortSheet = false 
     
     let database = Database()
     let filters = NavigationController.shared.filters
@@ -22,6 +23,18 @@ class SettlementsViewModel: ObservableObject {
     public func updateDetailTechnolody(techolody: DetailTechology) {
         filters.update(detailTechnolody: techolody)
         getSettlements()
+    }
+    
+    public func updateSortState(_ sortState: SortState) {
+        NavigationController.shared.sortState = sortState
+        
+        settlementModels.sort { lhs, rhs in
+            switch sortState {
+            case .name: return lhs.settlement < rhs.settlement
+            case .basesCount: return lhs.baseStationsCount > rhs.baseStationsCount
+            case .date: return lhs.lastUpdated > rhs.lastUpdated
+            }
+        }
     }
     
     private func getSettlements() {

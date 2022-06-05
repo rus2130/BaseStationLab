@@ -16,6 +16,7 @@ struct SettlementsView: View {
         }
         .toolbar { toolbarSort }
         .overlay(filterSheet)
+        .overlay(sortSheet)
         .animation(.easeIn, value: viewModel.settlementModels)
     }
     
@@ -24,14 +25,14 @@ struct SettlementsView: View {
             ForEach(viewModel.settlementModels) { settlementModel in
                 SettlementsViewCell(model: settlementModel)
             }
-            .padding([.horizontal, .bottom], 24)
         }
+        .padding([.horizontal, .bottom], 24)
     }
     
     private var toolbarSort: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
-                viewModel.showingFilterActionSheet = true
+                viewModel.showingSortSheet = true
             } label: {
                 Image(systemName: "arrow.up.arrow.down")
             }
@@ -44,6 +45,16 @@ struct SettlementsView: View {
                 FilterActionSheet(
                     isPresented: $viewModel.showingFilterActionSheet,
                     action: viewModel.updateDetailTechnolody
+                )
+            )
+    }
+    
+    private var sortSheet: some View {
+        ZStack {}
+            .overlay(
+                SortActionSheet(
+                    isPresented: $viewModel.showingSortSheet,
+                    action: viewModel.updateSortState
                 )
             )
     }

@@ -34,8 +34,8 @@ struct StartView: View {
                     StartViewCell(model: providerModel)
                 }
             }
-            .padding([.horizontal, .bottom], 24)
         }
+        .padding([.horizontal, .bottom], 24)
     }
     
     private var filters: some View {

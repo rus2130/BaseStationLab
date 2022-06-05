@@ -31,8 +31,8 @@ struct RegionsView: View {
                     RegionViewCell(model: regionModel)
                 }
             }
-            .padding([.horizontal, .bottom], 24)
         }
+        .padding([.horizontal, .bottom], 24)
     }
     
     private var toolbarSort: some ToolbarContent {
