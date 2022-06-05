@@ -17,6 +17,7 @@ struct SettlementsView: View {
         .toolbar { toolbarSort }
         .overlay(filterSheet)
         .overlay(sortSheet)
+        .navigationTitle(viewModel.getNavigationTitle())
         .animation(.easeIn, value: viewModel.settlementModels)
     }
     
@@ -26,7 +27,7 @@ struct SettlementsView: View {
                 SettlementsViewCell(model: settlementModel)
             }
         }
-        .padding([.horizontal, .bottom], 24)
+        .padding(24)
     }
     
     private var toolbarSort: some ToolbarContent {

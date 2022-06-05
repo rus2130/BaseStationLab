@@ -33,7 +33,7 @@ struct RegionsView: View {
                 }
             }
         }
-        .padding([.horizontal, .bottom], 24)
+        .padding(24)
     }
     
     private var toolbarSort: some ToolbarContent {

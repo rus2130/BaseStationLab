@@ -29,6 +29,14 @@ class SettlementsViewModel: ObservableObject {
         settlementModels.sort(sortState: sortState)
     }
     
+    public func getNavigationTitle() -> String {
+        let region = settlementModels.first?.region ?? ""
+        guard filters.currentDetailTecholody != .all else {
+            return region + " " + filters.currentTechnolody.rawValue
+        }
+        return region + " " + filters.currentDetailTecholody.title
+    }
+    
     private func getSettlements() {
         database.getBases { bases in
             let filteredBases = bases.filteredBy(
