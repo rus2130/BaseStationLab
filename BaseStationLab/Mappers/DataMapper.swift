@@ -63,4 +63,22 @@ class DataMapper {
             rruNames: groupedRru
         )
     }
+    
+    static func basesToSettlementCellModel(bases: Results<BaseStation>) -> SettlementCellModel {
+        let provider = bases.getProvider()
+        let region = bases.getRegion()
+        let settlement = bases.getSettlement()
+        let basesCount = bases.count
+        let lastUpdated = bases.getLastUpdated()
+        let groupedRru = bases.getGroupedRru()
+        
+        return SettlementCellModel(
+            provider: provider,
+            region: region,
+            settlement: settlement,
+            baseStationsCount: basesCount,
+            lastUpdated: lastUpdated,
+            rruNames: groupedRru
+        )
+    }
 }

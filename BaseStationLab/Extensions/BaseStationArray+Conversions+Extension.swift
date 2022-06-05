@@ -40,6 +40,10 @@ extension Results where Element: BaseStation {
         self.first?.region ?? ""
     }
     
+    func getSettlement() -> String {
+        self.first?.settlement ?? ""
+    }
+    
     func getAvailableProviders() -> [Provider] {
         let providers = Set(self.value(forKey: "freqIn") as? [String] ?? [])
         return providers.map { Provider(rawValue: $0) ?? .invalid }

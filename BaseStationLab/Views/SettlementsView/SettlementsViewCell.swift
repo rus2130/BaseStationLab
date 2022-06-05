@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettlementsViewCell: View {
+    var model: SettlementCellModel
+    
     var body: some View {
         card
             .background(Color.blue)
@@ -31,26 +33,35 @@ struct SettlementsViewCell: View {
     }
     
     private var settlementName: some View {
-        Text("Рівне")
+        Text(model.settlement)
             .font(.system(size: 18, weight: .bold))
     }
     
     private var basesCount: some View {
-        Text("18958")
+        Text(model.baseStationsCountString)
     }
     
     private var lastUpdated: some View {
-        Text("01.01.2022")
+        Text(model.lastUpdatedString)
     }
     
     private var hardware: some View {
-        Text("Huawei: 4566  Erricson: 4416  Інші: 1188")
+        Text(model.rruNamesString)
             .multilineTextAlignment(.center)
     }
 }
 
 struct SettlementsViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        SettlementsViewCell()
+        SettlementsViewCell(
+            model: .init(
+                provider: Provider.kyivstar,
+                region: "Волинська",
+                settlement: "Луцьк",
+                baseStationsCount: 1000,
+                lastUpdated: Date(),
+                rruNames: ["Huawei: 100"]
+            )
+        )
     }
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SettlementsView: View {
+    @StateObject var viewModel = SettlementsViewModel()
+    
     var body: some View {
         ScrollView(.vertical) {
             settlements
@@ -17,8 +19,8 @@ struct SettlementsView: View {
     
     private var settlements: some View {
         LazyVStack(spacing: 12) {
-            ForEach(0..<25) { _ in
-                SettlementsViewCell()
+            ForEach(viewModel.settlementModels) { settlementModel in
+                SettlementsViewCell(model: settlementModel)
             }
             .padding(.horizontal, 24)
         }
