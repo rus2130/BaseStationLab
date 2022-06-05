@@ -25,11 +25,11 @@ struct StartView: View {
     
     private var providers: some View {
         LazyVStack(spacing: 16) {
-            ForEach(0..<3) { _ in
+            ForEach(viewModel.providerModels) { providerModel in
                 Button {
                     navigationController.openRegions()
                 } label: {
-                    StartViewCell()
+                    StartViewCell(model: providerModel)
                 }
             }
             .padding(.horizontal, 24)

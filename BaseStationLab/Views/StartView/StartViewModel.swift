@@ -22,13 +22,25 @@ class StartViewModel: ObservableObject {
             guard let self = self, !bases.isEmpty else { return }
             
             let availableProviders = bases.getAvailableProviders()
+            let preparedProviderModels = availableProviders
+                .compactMap { self.createProviderModel($0, bases: bases) }
+                .sorted { $0.baseStationsCount > $1.baseStationsCount }
             
-            availableProviders.forEach { self.createProviderModel($0, bases: bases) }
+            DispatchQueue.main.async {
+                self.providerModels = preparedProviderModels
+            }
         }
     }
     
-    private func createProviderModel(_ provider: Provider, bases: Results<BaseStation>) {
-        guard provider != .invalid else { return }
+    private func createProviderModel(_ provider: Provider, bases: Results<BaseStation>) -> StartViewCellModel? {
+        guard provider != .invalid else { return nil }
         
+        let filteredBases = bases.filteredBy(provider: provider.rawValue)
+        
+        print(filteredBases.count)
+        
+        let cellModel = DataMapper.basesToStartViewCellModel(bases: filteredBases)
+        
+        return cellModel
     }
 }

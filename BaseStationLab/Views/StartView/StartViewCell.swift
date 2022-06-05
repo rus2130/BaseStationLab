@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct StartViewCell: View {
+    var model: StartViewCellModel
+    
     var body: some View {
         card
             .background(Color.blue)
@@ -51,12 +53,12 @@ struct StartViewCell: View {
     }
     
     private var providerName: some View {
-        Text("Kyivstar")
+        Text(model.providerString)
             .font(.system(size: 20, weight: .bold))
     }
     
     private var basesCount: some View {
-        Text("18958")
+        Text(model.baseStationsCountString)
             .font(.system(size: 20, weight: .bold))
     }
     
@@ -65,11 +67,11 @@ struct StartViewCell: View {
     }
     
     private var regions: some View {
-        Text("25 регіонів")
+        Text(model.regionsCountString)
     }
     
     private var settlements: some View {
-        Text("25 н.пункти")
+        Text(model.settlementsCountString)
     }
     
     private var updatedTitle: some View {
@@ -77,17 +79,26 @@ struct StartViewCell: View {
     }
     
     private var lastUpdated: some View {
-        Text("01.01.2022")
+        Text(model.lastUpdatedString)
     }
     
     private var hardware: some View {
-        Text("Huawei: 4566  Erricson: 4416  Інші: 1188")
+        Text(model.rruNamesString)
             .multilineTextAlignment(.center)
     }
 }
 
 struct StartViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        StartViewCell()
+        StartViewCell(
+            model: StartViewCellModel(
+                provider: .kyivstar,
+                regionsCount: 25,
+                settlementsCount: 300,
+                baseStationsCount: 10000,
+                lastUpdated: Date(),
+                rruNames: ["Huawei: 100"]
+            )
+        )
     }
 }
