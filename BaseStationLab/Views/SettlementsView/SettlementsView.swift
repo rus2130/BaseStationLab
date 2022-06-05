@@ -16,6 +16,7 @@ struct SettlementsView: View {
         }
         .toolbar { toolbarSort }
         .overlay(filterSheet)
+        .animation(.easeIn, value: viewModel.settlementModels)
     }
     
     private var settlements: some View {
@@ -30,7 +31,7 @@ struct SettlementsView: View {
     private var toolbarSort: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
-                NavigationController.shared.showingFilterActionSheet = true
+                viewModel.showingFilterActionSheet = true
             } label: {
                 Image(systemName: "arrow.up.arrow.down")
             }
@@ -41,7 +42,7 @@ struct SettlementsView: View {
         ZStack {}
             .overlay(
                 FilterActionSheet(
-                    isPresented: $viewModel.showingFilterSheet,
+                    isPresented: $viewModel.showingFilterActionSheet,
                     action: viewModel.updateDetailTechnolody
                 )
             )

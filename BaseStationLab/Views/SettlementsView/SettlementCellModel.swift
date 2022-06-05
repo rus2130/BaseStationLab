@@ -9,11 +9,7 @@ import Foundation
 
 struct SettlementCellModel: Equatable, Identifiable, Hashable {
     var id: String {
-        provider.rawValue +
-        settlement +
-        String(region) +
-        String(baseStationsCount) +
-        String(rruNames.joined(separator: ""))
+        provider.rawValue + settlement + String(region)
     }
     
     var provider: Provider

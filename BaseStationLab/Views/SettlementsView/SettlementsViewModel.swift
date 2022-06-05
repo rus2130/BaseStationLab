@@ -10,7 +10,7 @@ import RealmSwift
 
 class SettlementsViewModel: ObservableObject {
     @Published var settlementModels = [SettlementCellModel]()
-    @Published var showingFilterSheet = false
+    @Published var showingFilterActionSheet = false
     
     let database = Database()
     let filters = NavigationController.shared.filters
