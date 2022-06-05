@@ -18,6 +18,11 @@ class SettlementsViewModel: ObservableObject {
         getSettlements()
     }
     
+    public func updateDetailTechnolody(techolody: DetailTechology) {
+        filters.update(detailTechnolody: techolody)
+        getSettlements()
+    }
+    
     private func getSettlements() {
         database.getBases { bases in
             let filteredBases = bases.filteredBy(

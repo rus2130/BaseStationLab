@@ -19,7 +19,7 @@ class RegionsViewModel: ObservableObject {
     }
     
     public func updateDetailTechnolody(techolody: DetailTechology) {
-        NavigationController.shared.filters.update(detailTechnolody: techolody)
+        filters.update(detailTechnolody: techolody)
         getRegions()
     }
     
