@@ -8,5 +8,8 @@
 import Foundation
 
 enum Provider: String, CaseIterable {
-    case kyivstar, vodafone, lifecell 
+    case kyivstar = "Kyivstar"
+    case vodafone = "Vodafone"
+    case lifecell = "Lifecell"
+    case invalid = "Invalid"
 }
