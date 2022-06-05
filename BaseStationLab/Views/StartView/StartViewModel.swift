@@ -14,6 +14,7 @@ class StartViewModel: ObservableObject {
         updateCurrentTechnolody()
     }}
     @Published var currentDetailTechnolody = DetailTechology.all
+    @Published var showingFilterSheet = false 
     
     private var currentTecholodyFilter: String {
         guard currentDetailTechnolody != .all else { return currentTechology.filterValue }

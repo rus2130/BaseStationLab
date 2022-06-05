@@ -39,7 +39,12 @@ struct SettlementsView: View {
     
     private var filterSheet: some View {
         ZStack {}
-            .overlay(FilterActionSheet(action: viewModel.updateDetailTechnolody))
+            .overlay(
+                FilterActionSheet(
+                    isPresented: $viewModel.showingFilterSheet,
+                    action: viewModel.updateDetailTechnolody
+                )
+            )
     }
 }
 

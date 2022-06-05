@@ -10,6 +10,7 @@ import RealmSwift
 
 class RegionsViewModel: ObservableObject {
     @Published var regionModels = [RegionCellModel]()
+    @Published var showingFilterSheet = false
     
     let database = Database()
     let filters = NavigationController.shared.filters

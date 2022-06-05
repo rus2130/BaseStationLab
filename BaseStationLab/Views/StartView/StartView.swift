@@ -52,7 +52,7 @@ struct StartView: View {
     private var toolbarComparison: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button {
-                navigationController.showingFilterActionSheet = true
+                viewModel.showingFilterSheet = true
             } label: {
                 Text("Порівняння")
             }
@@ -72,7 +72,12 @@ struct StartView: View {
     
     private var filterSheet: some View {
         ZStack {}
-            .overlay(FilterActionSheet(action: viewModel.updateDetailTechnolody))
+            .overlay(
+                FilterActionSheet(
+                    isPresented: $viewModel.showingFilterSheet,
+                    action: viewModel.updateDetailTechnolody
+                )
+            )
     }
 }
 

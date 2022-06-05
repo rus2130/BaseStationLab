@@ -37,7 +37,7 @@ struct RegionsView: View {
     private var toolbarSort: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
-                navigationController.showingFilterActionSheet = true
+                viewModel.showingFilterSheet = true
             } label: {
                 Image(systemName: "arrow.up.arrow.down")
             }
@@ -57,7 +57,12 @@ struct RegionsView: View {
     
     private var filterSheet: some View {
         ZStack {}
-            .overlay(FilterActionSheet(action: viewModel.updateDetailTechnolody))
+            .overlay(
+                FilterActionSheet(
+                    isPresented: $viewModel.showingFilterSheet,
+                    action: viewModel.updateDetailTechnolody
+                )
+            )
     }
 }
 

@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct FilterActionSheet: View {
-    @StateObject var navigationController = NavigationController.shared
+    @StateObject private var navigationController = NavigationController.shared
+    @Binding var isPresented: Bool
     var action: (DetailTechology) -> ()
     
     var body: some View {
         ZStack{}
-            .actionSheet(isPresented: $navigationController.showingFilterActionSheet) {
+            .actionSheet(isPresented: $isPresented) {
                 actionSheet
             }
     }
