@@ -27,7 +27,7 @@ struct StartView: View {
         LazyVStack(spacing: 16) {
             ForEach(viewModel.providerModels) { providerModel in
                 Button {
-                    navigationController.openRegions()
+                    navigationController.openRegions(provider: providerModel.provider)
                 } label: {
                     StartViewCell(model: providerModel)
                 }

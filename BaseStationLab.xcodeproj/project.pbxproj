@@ -40,6 +40,7 @@
 		44B16E14284D4529008515F0 /* RegionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B16E13284D4529008515F0 /* RegionCellModel.swift */; };
 		44B16E16284D4A74008515F0 /* SettlementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B16E15284D4A74008515F0 /* SettlementsViewModel.swift */; };
 		44B16E18284D4A82008515F0 /* SettlementCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B16E17284D4A82008515F0 /* SettlementCellModel.swift */; };
+		44B16E1B284D4F35008515F0 /* BaseStationsFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B16E1A284D4F35008515F0 /* BaseStationsFilters.swift */; };
 		860E32D4CC204605DBE3C84A /* Pods_BaseStationLab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F13E98E3E2BC474C0D195AF /* Pods_BaseStationLab.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,7 @@
 		44B16E13284D4529008515F0 /* RegionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionCellModel.swift; sourceTree = "<group>"; };
 		44B16E15284D4A74008515F0 /* SettlementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettlementsViewModel.swift; sourceTree = "<group>"; };
 		44B16E17284D4A82008515F0 /* SettlementCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettlementCellModel.swift; sourceTree = "<group>"; };
+		44B16E1A284D4F35008515F0 /* BaseStationsFilters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStationsFilters.swift; sourceTree = "<group>"; };
 		6F13E98E3E2BC474C0D195AF /* Pods_BaseStationLab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaseStationLab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F2BD98DE2BCE43394C55DBC /* Pods-BaseStationLab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseStationLab.release.xcconfig"; path = "Target Support Files/Pods-BaseStationLab/Pods-BaseStationLab.release.xcconfig"; sourceTree = "<group>"; };
 		FA3BB56DCA8637E57026FCF2 /* Pods-BaseStationLab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaseStationLab.debug.xcconfig"; path = "Target Support Files/Pods-BaseStationLab/Pods-BaseStationLab.debug.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		446D5C61284D106A00628FB6 /* BaseStationLab */ = {
 			isa = PBXGroup;
 			children = (
+				44B16E19284D4F10008515F0 /* Filters */,
 				44B16E06284D2F44008515F0 /* DataManagment */,
 				44B16E03284D2D5A008515F0 /* StringConstants */,
 				44B16DF8284D2CD4008515F0 /* Mappers */,
@@ -263,6 +266,14 @@
 				44B16E07284D2F57008515F0 /* BasesController.swift */,
 			);
 			path = DataManagment;
+			sourceTree = "<group>";
+		};
+		44B16E19284D4F10008515F0 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				44B16E1A284D4F35008515F0 /* BaseStationsFilters.swift */,
+			);
+			path = Filters;
 			sourceTree = "<group>";
 		};
 		DF93E691EC321796013FEDC8 /* Pods */ = {
@@ -425,6 +436,7 @@
 				446D5C8F284D22FF00628FB6 /* DetailTechonology.swift in Sources */,
 				44B16E12284D44E8008515F0 /* RegionsViewModel.swift in Sources */,
 				446D5C8D284D22D400628FB6 /* Technolody.swift in Sources */,
+				44B16E1B284D4F35008515F0 /* BaseStationsFilters.swift in Sources */,
 				446D5C8B284D229800628FB6 /* Provider.swift in Sources */,
 				446D5C7F284D196C00628FB6 /* SettlementsViewCell.swift in Sources */,
 			);

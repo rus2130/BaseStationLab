@@ -12,18 +12,15 @@ class NavigationController: ObservableObject {
     
     @Published var showingRegions = false
     @Published var showingSettlements = false
+    @Published var filters = BaseStationFilters()
     
-    public func openRegions() {
+    public func openRegions(provider: Provider) {
+        filters.update(provider: provider)
         showingRegions = true
     }
     
-    public func openSettlements() {
+    public func openSettlements(region: String) {
+        filters.update(region: region)
         showingSettlements = true
     }
-    
-    public func popToRoot() {
-        showingSettlements = false
-        showingRegions = false 
-    }
-    
 }
