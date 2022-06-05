@@ -24,12 +24,17 @@ struct SortActionSheet: View {
             title: Text("Сортування"),
             message: Text("Оберіть елемент для сортування"),
             buttons: [
-                .default(Text(SortState.name.title)) { action(.name) },
-                .default(Text(SortState.basesCount.title)) { action(.basesCount) },
-                .default(Text(SortState.date.title)) { action(.date) },
+                .default(Text(SortState.name.title)) { makeAction(.name) },
+                .default(Text(SortState.basesCount.title)) { makeAction(.basesCount) },
+                .default(Text(SortState.date.title)) { makeAction(.date) },
                 .destructive(Text("Скасувати"))
             ]
         )
+    }
+    
+    private func makeAction(_ sortState: SortState) {
+        navigationController.sortState = sortState
+        action(sortState)
     }
 }
 

@@ -30,7 +30,6 @@ class StartViewModel: ObservableObject {
     
     public func updateDetailTechnolody(technolody: DetailTechology) {
         currentDetailTechnolody = technolody
-        NavigationController.shared.filters.update(detailTechnolody: technolody)
         getProviderModels()
     }
     
@@ -65,7 +64,6 @@ class StartViewModel: ObservableObject {
     
     private func updateCurrentTechnolody() {
         NavigationController.shared.filters.update(technolody: currentTechology)
-        NavigationController.shared.filters.update(detailTechnolody: .all)
         currentDetailTechnolody = .all
         getProviderModels()
     }

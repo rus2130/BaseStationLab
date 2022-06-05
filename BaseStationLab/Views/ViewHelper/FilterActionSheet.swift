@@ -38,27 +38,32 @@ struct FilterActionSheet: View {
     
     private var lteButtons: [ActionSheet.Button] {
         [
-            .default(Text(DetailTechology.all.title)) { action(.all) },
-            .default(Text(DetailTechology.lte2600.title)) { action(.lte2600) },
-            .default(Text(DetailTechology.lte1800.title)) { action(.lte1800) },
-            .default(Text(DetailTechology.lte900.title)) { action(.lte900) },
+            .default(Text(DetailTechology.all.title)) { makeAction(.all) },
+            .default(Text(DetailTechology.lte2600.title)) { makeAction(.lte2600) },
+            .default(Text(DetailTechology.lte1800.title)) { makeAction(.lte1800) },
+            .default(Text(DetailTechology.lte900.title)) { makeAction(.lte900) },
             .destructive(Text("Скасувати"))
         ]
     }
     
     private var umtsButtons: [ActionSheet.Button] {
         [
-            .default(Text(DetailTechology.all.title)) { action(.all) },
+            .default(Text(DetailTechology.all.title)) { makeAction(.all) },
             .destructive(Text("Скасувати"))
         ]
     }
     
     private var gsmButtons: [ActionSheet.Button] {
         [
-            .default(Text(DetailTechology.all.title)) { action(.all) },
-            .default(Text(DetailTechology.gsm1800.title)) { action(.gsm1800) },
-            .default(Text(DetailTechology.gsm900.title)) { action(.gsm900) },
+            .default(Text(DetailTechology.all.title)) { makeAction(.all) },
+            .default(Text(DetailTechology.gsm1800.title)) { makeAction(.gsm1800) },
+            .default(Text(DetailTechology.gsm900.title)) { makeAction(.gsm900) },
             .destructive(Text("Скасувати"))
         ]
+    }
+    
+    private func makeAction(_ technolody: DetailTechology) {
+        navigationController.filters.update(detailTechnolody: technolody)
+        action(technolody)
     }
 }

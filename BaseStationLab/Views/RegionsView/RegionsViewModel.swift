@@ -22,20 +22,11 @@ class RegionsViewModel: ObservableObject {
     }
     
     public func updateDetailTechnolody(techolody: DetailTechology) {
-        filters.update(detailTechnolody: techolody)
         getRegions()
     }
     
     public func updateSortState(_ sortState: SortState) {
-        NavigationController.shared.sortState = sortState
-        
-        regionModels.sort { lhs, rhs in
-            switch sortState {
-            case .name: return lhs.region < rhs.region
-            case .basesCount: return lhs.baseStationsCount > rhs.baseStationsCount
-            case .date: return lhs.lastUpdated > rhs.lastUpdated
-            }
-        }
+        regionModels.sort(sortState: sortState)
     }
     
     private func getRegions() {
@@ -50,6 +41,7 @@ class RegionsViewModel: ObservableObject {
             let availableRegions = filteredBases.getAvailableRegions()
             let preparedRegionModels = availableRegions
                 .compactMap { self.createRegionModel($0, bases: bases) }
+                .sorted(sortState: self.sortState)
             
             DispatchQueue.main.async {
                 self.regionModels = preparedRegionModels

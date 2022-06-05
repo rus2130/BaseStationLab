@@ -15,26 +15,18 @@ class SettlementsViewModel: ObservableObject {
     
     let database = Database()
     let filters = NavigationController.shared.filters
+    let sortState = NavigationController.shared.sortState
     
     init() {
         getSettlements()
     }
     
     public func updateDetailTechnolody(techolody: DetailTechology) {
-        filters.update(detailTechnolody: techolody)
         getSettlements()
     }
     
     public func updateSortState(_ sortState: SortState) {
-        NavigationController.shared.sortState = sortState
-        
-        settlementModels.sort { lhs, rhs in
-            switch sortState {
-            case .name: return lhs.settlement < rhs.settlement
-            case .basesCount: return lhs.baseStationsCount > rhs.baseStationsCount
-            case .date: return lhs.lastUpdated > rhs.lastUpdated
-            }
-        }
+        settlementModels.sort(sortState: sortState)
     }
     
     private func getSettlements() {
@@ -48,6 +40,7 @@ class SettlementsViewModel: ObservableObject {
             let availableSettlements = filteredBases.getAvailableSettlements()
             let preparedSettlementsModels = availableSettlements
                 .compactMap { self.createSettlementModel($0, bases: bases) }
+                .sorted(sortState: self.sortState)
             
             DispatchQueue.main.async {
                 self.settlementModels = preparedSettlementsModels
