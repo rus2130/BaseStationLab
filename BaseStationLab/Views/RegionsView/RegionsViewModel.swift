@@ -11,9 +11,11 @@ import RealmSwift
 class RegionsViewModel: ObservableObject {
     @Published var regionModels = [RegionCellModel]()
     @Published var showingFilterSheet = false
+    @Published var showingSortSheet = false
     
     let database = Database()
     let filters = NavigationController.shared.filters
+    let sortState = NavigationController.shared.sortState
     
     init() {
         getRegions()
@@ -22,6 +24,18 @@ class RegionsViewModel: ObservableObject {
     public func updateDetailTechnolody(techolody: DetailTechology) {
         filters.update(detailTechnolody: techolody)
         getRegions()
+    }
+    
+    public func updateSortState(_ sortState: SortState) {
+        NavigationController.shared.sortState = sortState
+        
+        regionModels.sort { lhs, rhs in
+            switch sortState {
+            case .name: return lhs.region < rhs.region
+            case .basesCount: return lhs.baseStationsCount > rhs.baseStationsCount
+            case .date: return lhs.lastUpdated > rhs.lastUpdated
+            }
+        }
     }
     
     private func getRegions() {

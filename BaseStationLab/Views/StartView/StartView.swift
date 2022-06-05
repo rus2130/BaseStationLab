@@ -34,7 +34,7 @@ struct StartView: View {
                     StartViewCell(model: providerModel)
                 }
             }
-            .padding(.horizontal, 24)
+            .padding([.horizontal, .bottom], 24)
         }
     }
     

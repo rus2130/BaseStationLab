@@ -24,7 +24,7 @@ struct SettlementsView: View {
             ForEach(viewModel.settlementModels) { settlementModel in
                 SettlementsViewCell(model: settlementModel)
             }
-            .padding(.horizontal, 24)
+            .padding([.horizontal, .bottom], 24)
         }
     }
     

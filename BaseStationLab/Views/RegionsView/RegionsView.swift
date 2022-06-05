@@ -19,6 +19,7 @@ struct RegionsView: View {
         .animation(.easeIn, value: viewModel.regionModels)
         .toolbar { toolbarSort }
         .overlay(filterSheet)
+        .overlay(sortSheet)
     }
     
     private var regions: some View {
@@ -30,14 +31,14 @@ struct RegionsView: View {
                     RegionViewCell(model: regionModel)
                 }
             }
-            .padding(.horizontal, 24)
+            .padding([.horizontal, .bottom], 24)
         }
     }
     
     private var toolbarSort: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
-                viewModel.showingFilterSheet = true
+                viewModel.showingSortSheet = true
             } label: {
                 Image(systemName: "arrow.up.arrow.down")
             }
@@ -61,6 +62,16 @@ struct RegionsView: View {
                 FilterActionSheet(
                     isPresented: $viewModel.showingFilterSheet,
                     action: viewModel.updateDetailTechnolody
+                )
+            )
+    }
+    
+    private var sortSheet: some View {
+        ZStack {}
+            .overlay(
+                SortActionSheet(
+                    isPresented: $viewModel.showingSortSheet,
+                    action: viewModel.updateSortState
                 )
             )
     }

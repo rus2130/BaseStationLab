@@ -14,6 +14,7 @@ class NavigationController: ObservableObject {
     @Published var showingRegions = false
     @Published var showingSettlements = false
     @Published var filters = BaseStationFilters()
+    @Published var sortState = SortState.name
     
     public func openRegions(provider: Provider) {
         filters.update(provider: provider)
