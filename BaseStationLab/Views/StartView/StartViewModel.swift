@@ -13,6 +13,13 @@ class StartViewModel: ObservableObject {
     @Published var currentTechology = Technolody.lte { didSet {
         updateCurrentTechnolody()
     }}
+    @Published var currentDetailTechnolody = DetailTechology.all
+    
+    private var currentTecholodyFilter: String {
+        guard currentDetailTechnolody != .all else { return currentTechology.filterValue }
+        
+        return currentDetailTechnolody.rawValue
+    }
     
     private let database = Database()
     
@@ -20,10 +27,16 @@ class StartViewModel: ObservableObject {
         getProviderModels()
     }
     
+    public func updateDetailTechnolody(technolody: DetailTechology) {
+        currentDetailTechnolody = technolody
+        NavigationController.shared.filters.update(detailTechnolody: technolody)
+        getProviderModels()
+    }
+    
     public func getProviderModels() {
         database.getBases { [weak self] bases in
             guard let self = self, !bases.isEmpty else { return }
-            let filteredBases = bases.filteredBy(technology: self.currentTechology.filterValue)
+            let filteredBases = bases.filteredBy(technology: self.currentTecholodyFilter)
             
             let availableProviders = filteredBases.getAvailableProviders()
             let preparedProviderModels = availableProviders
@@ -41,7 +54,7 @@ class StartViewModel: ObservableObject {
         
         let filteredBases = bases.filteredBy(
             provider: provider.rawValue,
-            technology: currentTechology.filterValue
+            technology: currentTecholodyFilter
         )
         
         let cellModel = DataMapper.basesToStartViewCellModel(bases: filteredBases)
@@ -51,6 +64,8 @@ class StartViewModel: ObservableObject {
     
     private func updateCurrentTechnolody() {
         NavigationController.shared.filters.update(technolody: currentTechology)
+        NavigationController.shared.filters.update(detailTechnolody: .all)
+        currentDetailTechnolody = .all
         getProviderModels()
     }
 }

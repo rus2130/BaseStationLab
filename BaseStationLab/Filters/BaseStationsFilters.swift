@@ -8,13 +8,18 @@
 import Foundation
 
 class BaseStationFilters: ObservableObject {
-    @Published private var currentProvider: Provider?
-    @Published private var currentRegion: String?
-    @Published private var currentTechnolody: Technolody?
+    @Published var currentProvider: Provider?
+    @Published var currentRegion: String?
+    @Published var currentTechnolody = Technolody.lte
+    @Published var currentDetailTecholody = DetailTechology.all
     
     var currentProviderFilter: String { currentProvider?.rawValue ?? "" }
     var currentRegionFilter: String { currentRegion ?? "" }
-    var currentTechnologyFilter: String { (currentTechnolody ?? .lte).filterValue }
+    var currentTechnologyFilter: String {
+        guard currentDetailTecholody != .all else { return currentDetailTecholody.rawValue }
+        return currentTechnolody.filterValue
+    }
+    var currentDetailTecholodyFilter: String { currentDetailTecholody.rawValue }
     
     public func update(provider: Provider) {
         currentProvider = provider
@@ -26,5 +31,9 @@ class BaseStationFilters: ObservableObject {
     
     public func update(technolody: Technolody) {
         currentTechnolody = technolody
+    }
+    
+    public func update(detailTechnolody: DetailTechology) {
+        currentDetailTecholody = detailTechnolody
     }
 }

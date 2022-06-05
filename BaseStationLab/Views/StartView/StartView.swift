@@ -21,6 +21,7 @@ struct StartView: View {
         }
         .navigationTitle(viewModel.currentTechology.rawValue)
         .toolbar { toolbarComparison }
+        .overlay(filterSheet)
         .animation(.easeIn, value: viewModel.providerModels)
     }
     
@@ -51,6 +52,7 @@ struct StartView: View {
     private var toolbarComparison: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button {
+                navigationController.showingFilterActionSheet = true
             } label: {
                 Text("Порівняння")
             }
@@ -66,6 +68,11 @@ struct StartView: View {
             },
             label: { EmptyView() }
         )
+    }
+    
+    private var filterSheet: some View {
+        ZStack {}
+            .overlay(FilterActionSheet(action: viewModel.updateDetailTechnolody))
     }
 }
 
