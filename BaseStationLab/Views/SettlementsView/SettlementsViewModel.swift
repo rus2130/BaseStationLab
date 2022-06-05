@@ -46,17 +46,13 @@ class SettlementsViewModel: ObservableObject {
             )
             
             let availableSettlements = filteredBases.getAvailableSettlements()
-            let preparedSettlementsModels = availableSettlements
-                .compactMap { self.createSettlementModel($0, bases: bases) }
-                .sorted(sortState: self.sortState)
             
-            DispatchQueue.main.async {
-                self.settlementModels = preparedSettlementsModels
-            }
+            availableSettlements
+                .forEach { self.createSettlementModel($0, bases: bases) }
         }
     }
     
-    private func createSettlementModel(_ settlement: String, bases: Results<BaseStation>) -> SettlementCellModel {
+    private func createSettlementModel(_ settlement: String, bases: Results<BaseStation>) {
         let filteredBases = bases.filteredBy(
             provider: filters.currentProviderFilter,
             technology: filters.currentTechnologyFilter,
@@ -66,6 +62,12 @@ class SettlementsViewModel: ObservableObject {
         
         let cellModel = DataMapper.basesToSettlementCellModel(bases: filteredBases)
         
-        return cellModel
+        DispatchQueue.main.async {
+            if let index = self.settlementModels.firstIndex(where: { $0.settlement == cellModel.settlement }) {
+                self.settlementModels[index] = cellModel
+            } else {
+                self.settlementModels.append(cellModel)
+            }
+        }
     }
 }
