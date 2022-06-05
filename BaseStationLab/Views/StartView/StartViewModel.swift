@@ -10,6 +10,9 @@ import RealmSwift
 
 class StartViewModel: ObservableObject {
     @Published var providerModels = [StartCellModel]()
+    @Published var currentTechology = Technolody.lte { didSet {
+        updateCurrentTechnolody()
+    }}
     
     private let database = Database()
     
@@ -20,8 +23,9 @@ class StartViewModel: ObservableObject {
     public func getProviderModels() {
         database.getBases { [weak self] bases in
             guard let self = self, !bases.isEmpty else { return }
+            let filteredBases = bases.filteredBy(technology: self.currentTechology.filterValue)
             
-            let availableProviders = bases.getAvailableProviders()
+            let availableProviders = filteredBases.getAvailableProviders()
             let preparedProviderModels = availableProviders
                 .compactMap { self.createProviderModel($0, bases: bases) }
                 .sorted { $0.baseStationsCount > $1.baseStationsCount }
@@ -37,11 +41,16 @@ class StartViewModel: ObservableObject {
         
         let filteredBases = bases.filteredBy(
             provider: provider.rawValue,
-            technology: Technolody.lte.filterValue
+            technology: currentTechology.filterValue
         )
         
         let cellModel = DataMapper.basesToStartViewCellModel(bases: filteredBases)
         
         return cellModel
+    }
+    
+    private func updateCurrentTechnolody() {
+        NavigationController.shared.filters.update(technolody: currentTechology)
+        getProviderModels()
     }
 }

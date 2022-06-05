@@ -21,6 +21,7 @@ struct StartView: View {
         }
         .navigationTitle("LTE")
         .toolbar { toolbarComparison }
+        .animation(.easeIn, value: viewModel.providerModels)
     }
     
     private var providers: some View {
@@ -37,9 +38,10 @@ struct StartView: View {
     }
     
     private var filters: some View {
-        Picker("", selection: .constant("LTE")) {
-            ForEach(["LTE", "UMTS", "EDGE", "ALL"], id: \.self) { techology in
-                Text(techology)
+        Picker("", selection: $viewModel.currentTechology) {
+            ForEach(Technolody.allCases) { techology in
+                Text(techology.rawValue)
+                    .tag(techology)
             }
         }
         .pickerStyle(SegmentedPickerStyle())

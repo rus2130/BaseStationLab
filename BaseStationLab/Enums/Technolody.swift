@@ -7,7 +7,9 @@
 
 import Foundation
 
-enum Technolody: String, CaseIterable {
+enum Technolody: String, Identifiable, CaseIterable {
+    var id: RawValue { rawValue }
+    
     case lte = "LTE"
     case umts = "UMTS"
     case gsm = "GSM"

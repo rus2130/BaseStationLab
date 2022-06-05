@@ -8,14 +8,8 @@
 import Foundation
 
 struct StartCellModel: Equatable, Identifiable, Hashable {
-    var id: String {
-        provider.rawValue +
-        String(regionsCount) +
-        String(settlementsCount) +
-        String(baseStationsCount) +
-        String(rruNames.joined(separator: ""))
-    }
-    
+    var id: String { provider.rawValue }
+   
     var provider: Provider
     var regionsCount: Int
     var settlementsCount: Int
