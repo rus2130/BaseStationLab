@@ -20,7 +20,10 @@ struct StartView: View {
             regionsNavigation
         }
         .navigationTitle(viewModel.getNavigationTitle())
-        .toolbar { toolbarComparison }
+        .toolbar {
+            toolbarComparison
+            toolbarFilter
+        }
         .overlay(filterSheet)
         .animation(.easeIn, value: viewModel.providerModels)
     }
@@ -52,7 +55,6 @@ struct StartView: View {
     private var toolbarComparison: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button {
-                viewModel.showingFilterSheet = true
             } label: {
                 Text("Порівняння")
             }
@@ -78,6 +80,19 @@ struct StartView: View {
                     action: viewModel.updateDetailTechnolody
                 )
             )
+    }
+    
+    private var toolbarFilter: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+                viewModel.showingFilterSheet = true
+            } label: {
+                Image("filterIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+            }
+        }
     }
 }
 

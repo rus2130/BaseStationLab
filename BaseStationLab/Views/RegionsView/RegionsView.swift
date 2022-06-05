@@ -17,7 +17,10 @@ struct RegionsView: View {
             settlementsNavigation
         }
         .animation(.easeIn, value: viewModel.regionModels)
-        .toolbar { toolbarSort }
+        .toolbar {
+            toolbarSort
+            toolbarFilter
+        }
         .navigationTitle(viewModel.getNavigationTitle())
         .overlay(filterSheet)
         .overlay(sortSheet)
@@ -42,6 +45,19 @@ struct RegionsView: View {
                 viewModel.showingSortSheet = true
             } label: {
                 Image(systemName: "arrow.up.arrow.down")
+            }
+        }
+    }
+    
+    private var toolbarFilter: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+                viewModel.showingFilterSheet = true
+            } label: {
+                Image("filterIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
             }
         }
     }

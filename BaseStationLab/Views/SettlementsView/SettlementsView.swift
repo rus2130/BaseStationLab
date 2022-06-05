@@ -14,7 +14,10 @@ struct SettlementsView: View {
         ScrollView(.vertical) {
             settlements
         }
-        .toolbar { toolbarSort }
+        .toolbar {
+            toolbarSort
+            toolbarFilter
+        }
         .overlay(filterSheet)
         .overlay(sortSheet)
         .navigationTitle(viewModel.getNavigationTitle())
@@ -36,6 +39,19 @@ struct SettlementsView: View {
                 viewModel.showingSortSheet = true
             } label: {
                 Image(systemName: "arrow.up.arrow.down")
+            }
+        }
+    }
+    
+    private var toolbarFilter: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+                viewModel.showingFilterActionSheet = true
+            } label: {
+                Image("filterIcon")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
             }
         }
     }
