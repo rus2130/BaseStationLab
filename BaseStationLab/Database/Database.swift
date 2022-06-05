@@ -30,7 +30,7 @@ class Database {
         }
     }
     
-    public func getData(completion: @escaping (Results<BaseStation>)->()) {
+    public func getBases(completion: @escaping (Results<BaseStation>)->()) {
         Database.realmAsyncQueue.async {
             let asyncRealm = try! Realm()
             completion(asyncRealm.objects(BaseStation.self))

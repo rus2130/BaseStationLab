@@ -34,4 +34,10 @@ extension Results where Element: BaseStation {
     func getProvider() -> Provider {
         Provider(rawValue: self.first?.freqIn ?? "") ?? .invalid
     }
+    
+    func getAvailableProviders() -> [Provider] {
+        let providers = Set(self.value(forKey: "freqIn") as? [String] ?? [])
+        
+        return providers.map { Provider(rawValue: $0) ?? .invalid }
+    }
 }

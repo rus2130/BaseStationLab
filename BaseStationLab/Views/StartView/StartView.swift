@@ -9,6 +9,7 @@ import SwiftUI
 
 struct StartView: View {
     @StateObject var navigationController = NavigationController.shared
+    @StateObject var viewModel = StartViewModel()
     
     var body: some View {
         ScrollView(.vertical) {
