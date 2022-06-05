@@ -62,12 +62,15 @@ class SettlementsViewModel: ObservableObject {
         
         let cellModel = DataMapper.basesToSettlementCellModel(bases: filteredBases)
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
             if let index = self.settlementModels.firstIndex(where: { $0.settlement == cellModel.settlement }) {
                 self.settlementModels[index] = cellModel
             } else {
                 self.settlementModels.append(cellModel)
             }
+            self.settlementModels.sort(sortState: self.sortState)
         }
     }
 }

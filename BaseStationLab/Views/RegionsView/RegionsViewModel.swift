@@ -59,12 +59,14 @@ class RegionsViewModel: ObservableObject {
         
         let cellModel = DataMapper.basesToRegionCellModel(bases: filteredBases)
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             if let index = self.regionModels.firstIndex(where: { $0.region == cellModel.region }) {
                 self.regionModels[index] = cellModel
             } else {
                 self.regionModels.append(cellModel)
             }
+            self.regionModels.sort(sortState: self.sortState)
         }
     }
 }

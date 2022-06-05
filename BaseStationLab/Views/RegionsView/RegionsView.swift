@@ -46,7 +46,6 @@ struct RegionsView: View {
             } label: {
                 Image(systemName: "arrow.up.arrow.down")
             }
-            .border(.red)
         }
     }
     
@@ -60,7 +59,6 @@ struct RegionsView: View {
                     .scaledToFit()
                     .frame(width: 24, height: 24)
             }
-            .border(.red)
         }
     }
     
