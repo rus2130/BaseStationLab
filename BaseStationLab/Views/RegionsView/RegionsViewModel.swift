@@ -29,6 +29,11 @@ class RegionsViewModel: ObservableObject {
         regionModels.sort(sortState: sortState)
     }
     
+    public func getNavigationTitle() -> String {
+        guard filters.currentDetailTecholody != .all else { return filters.currentTechnolody.rawValue }
+        return filters.currentDetailTecholody.title
+    }
+    
     private func getRegions() {
         database.getBases { [weak self] bases in
             guard let self = self, !bases.isEmpty else { return }

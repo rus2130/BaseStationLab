@@ -18,6 +18,7 @@ struct RegionsView: View {
         }
         .animation(.easeIn, value: viewModel.regionModels)
         .toolbar { toolbarSort }
+        .navigationTitle(viewModel.getNavigationTitle())
         .overlay(filterSheet)
         .overlay(sortSheet)
     }
