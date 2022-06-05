@@ -6,5 +6,5 @@ target 'BaseStationLab' do
   use_frameworks!
   
   pod 'SwiftSoup'
-
+  pod 'RealmSwift'
 end
