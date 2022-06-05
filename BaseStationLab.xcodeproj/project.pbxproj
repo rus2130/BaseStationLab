@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		446D5C63284D106A00628FB6 /* BaseStationLabApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D5C62284D106A00628FB6 /* BaseStationLabApp.swift */; };
-		446D5C65284D106A00628FB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D5C64284D106A00628FB6 /* ContentView.swift */; };
 		446D5C67284D106A00628FB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446D5C66284D106A00628FB6 /* Assets.xcassets */; };
 		446D5C6A284D106A00628FB6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 446D5C69284D106A00628FB6 /* Preview Assets.xcassets */; };
 		446D5C73284D108300628FB6 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D5C72284D108300628FB6 /* StartView.swift */; };
@@ -17,12 +16,12 @@
 		446D5C7A284D178A00628FB6 /* RegionsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D5C79284D178A00628FB6 /* RegionsViewCell.swift */; };
 		446D5C7C284D193D00628FB6 /* SettlementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D5C7B284D193D00628FB6 /* SettlementsView.swift */; };
 		446D5C7F284D196C00628FB6 /* SettlementsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D5C7E284D196C00628FB6 /* SettlementsViewCell.swift */; };
+		446D5C85284D1B8B00628FB6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446D5C84284D1B8B00628FB6 /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		446D5C5F284D106A00628FB6 /* BaseStationLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaseStationLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		446D5C62284D106A00628FB6 /* BaseStationLabApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStationLabApp.swift; sourceTree = "<group>"; };
-		446D5C64284D106A00628FB6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		446D5C66284D106A00628FB6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		446D5C69284D106A00628FB6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		446D5C72284D108300628FB6 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
@@ -31,6 +30,7 @@
 		446D5C79284D178A00628FB6 /* RegionsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionsViewCell.swift; sourceTree = "<group>"; };
 		446D5C7B284D193D00628FB6 /* SettlementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettlementsView.swift; sourceTree = "<group>"; };
 		446D5C7E284D196C00628FB6 /* SettlementsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettlementsViewCell.swift; sourceTree = "<group>"; };
+		446D5C84284D1B8B00628FB6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +63,9 @@
 		446D5C61284D106A00628FB6 /* BaseStationLab */ = {
 			isa = PBXGroup;
 			children = (
+				446D5C83284D1B6F00628FB6 /* Navigation */,
 				446D5C70284D107000628FB6 /* Views */,
 				446D5C62284D106A00628FB6 /* BaseStationLabApp.swift */,
-				446D5C64284D106A00628FB6 /* ContentView.swift */,
 				446D5C66284D106A00628FB6 /* Assets.xcassets */,
 				446D5C68284D106A00628FB6 /* Preview Content */,
 			);
@@ -115,6 +115,14 @@
 				446D5C7E284D196C00628FB6 /* SettlementsViewCell.swift */,
 			);
 			path = SettlementsView;
+			sourceTree = "<group>";
+		};
+		446D5C83284D1B6F00628FB6 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				446D5C84284D1B8B00628FB6 /* NavigationController.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,9 +196,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				446D5C73284D108300628FB6 /* StartView.swift in Sources */,
-				446D5C65284D106A00628FB6 /* ContentView.swift in Sources */,
 				446D5C7C284D193D00628FB6 /* SettlementsView.swift in Sources */,
 				446D5C7A284D178A00628FB6 /* RegionsViewCell.swift in Sources */,
+				446D5C85284D1B8B00628FB6 /* NavigationController.swift in Sources */,
 				446D5C63284D106A00628FB6 /* BaseStationLabApp.swift in Sources */,
 				446D5C75284D10A200628FB6 /* StartViewCell.swift in Sources */,
 				446D5C77284D176D00628FB6 /* RegionsView.swift in Sources */,

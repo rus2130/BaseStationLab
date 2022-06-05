@@ -8,25 +8,30 @@
 import SwiftUI
 
 struct StartView: View {
+    @StateObject var navigationController = NavigationController.shared
+    
     var body: some View {
         ScrollView(.vertical) {
             VStack(spacing: 24) {
                 filters
                 providers
             }
+            regionsNavigation
         }
         .navigationTitle("LTE")
-        .toolbar {
-            toolbarComparison
-        }
+        .toolbar { toolbarComparison }
     }
     
     private var providers: some View {
         LazyVStack(spacing: 16) {
             ForEach(0..<3) { _ in
-                StartViewCell()
-                    .padding(.horizontal, 24)
+                Button {
+                    navigationController.openRegions()
+                } label: {
+                    StartViewCell()
+                }
             }
+            .padding(.horizontal, 24)
         }
     }
     
@@ -47,6 +52,17 @@ struct StartView: View {
                 Text("Порівняння")
             }
         }
+    }
+    
+    private var regionsNavigation: some View {
+        NavigationLink(
+            isActive: $navigationController.showingRegions,
+            destination: {
+                RegionsView()
+                    .frame(maxWidth: 500)
+            },
+            label: { EmptyView() }
+        )
     }
 }
 
