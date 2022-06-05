@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StartViewCell: View {
-    var model: StartViewCellModel
+    var model: StartCellModel
     
     var body: some View {
         card
@@ -91,7 +91,7 @@ struct StartViewCell: View {
 struct StartViewCell_Previews: PreviewProvider {
     static var previews: some View {
         StartViewCell(
-            model: StartViewCellModel(
+            model: StartCellModel(
                 provider: .kyivstar,
                 regionsCount: 25,
                 settlementsCount: 300,

@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct RegionsViewCell: View {
+struct RegionViewCell: View {
+    var model: RegionCellModel
+    
     var body: some View {
         card
             .background(Color.blue)
@@ -38,30 +40,39 @@ struct RegionsViewCell: View {
     }
     
     private var regionName: some View {
-        Text("Житомирьска обл.")
+        Text(model.regionName)
             .font(.system(size: 18, weight: .bold))
     }
     
     private var basesCount: some View {
-        Text("18958")
+        Text(model.baseStationsCountString)
     }
     
     private var settlements: some View {
-        Text("25 н.пункти")
+        Text(model.settlementsCountString)
     }
     
     private var lastUpdated: some View {
-        Text("01.01.2022")
+        Text(model.lastUpdatedString)
     }
     
     private var hardware: some View {
-        Text("Huawei: 4566  Erricson: 4416  Інші: 1188")
+        Text(model.rruNamesString)
             .multilineTextAlignment(.center)
     }
 }
 
 struct RegionsViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        RegionsViewCell()
+        RegionViewCell(
+            model: .init(
+                provider: .kyivstar,
+                region: "Київ",
+                settlementsCount: 200,
+                baseStationsCount: 4000,
+                lastUpdated: Date(),
+                rruNames: ["Huawei: 100"]
+            )
+        )
     }
 }

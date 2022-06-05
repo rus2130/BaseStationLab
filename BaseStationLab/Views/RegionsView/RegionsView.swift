@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegionsView: View {
     @StateObject var navigationController = NavigationController.shared
+    @StateObject var viewModel = RegionsViewModel()
     
     var body: some View {
         ScrollView(.vertical) {
@@ -20,11 +21,11 @@ struct RegionsView: View {
     
     private var regions: some View {
         LazyVStack(spacing: 12) {
-            ForEach(0..<25) { _ in
+            ForEach(viewModel.regionModels) { regionModel in
                 Button {
                     navigationController.openSettlements()
                 } label: {
-                    RegionsViewCell()
+                    RegionViewCell(model: regionModel)
                 }
             }
             .padding(.horizontal, 24)

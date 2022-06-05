@@ -1,5 +1,5 @@
 //
-//  StartViewCellModel.swift
+//  StartCellModel.swift
 //  BaseStationLab
 //
 //  Created by Ruslan Duda on 05.06.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StartViewCellModel: Equatable, Identifiable, Hashable {
+struct StartCellModel: Equatable, Identifiable, Hashable {
     var id: String {
         provider.rawValue +
         String(regionsCount) +

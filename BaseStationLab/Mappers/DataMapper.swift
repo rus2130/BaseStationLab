@@ -28,7 +28,7 @@ class DataMapper {
         return returnValue
     }
     
-    static func basesToStartViewCellModel(bases: Results<BaseStation>) -> StartViewCellModel {
+    static func basesToStartViewCellModel(bases: Results<BaseStation>) -> StartCellModel {
         let provider = bases.getProvider()
         let regionsCount = bases.getRegionsCount()
         let settlementsCount = bases.getSettlementsCount()
@@ -36,9 +36,27 @@ class DataMapper {
         let lastUpdated = bases.getLastUpdated()
         let groupedRru = bases.getGroupedRru()
         
-        return StartViewCellModel(
+        return StartCellModel(
             provider: provider,
             regionsCount: regionsCount,
+            settlementsCount: settlementsCount,
+            baseStationsCount: basesCount,
+            lastUpdated: lastUpdated,
+            rruNames: groupedRru
+        )
+    }
+    
+    static func basesToRegionCellModel(bases: Results<BaseStation>) -> RegionCellModel {
+        let provider = bases.getProvider()
+        let region = bases.getRegion()
+        let settlementsCount = bases.getSettlementsCount()
+        let basesCount = bases.count
+        let lastUpdated = bases.getLastUpdated()
+        let groupedRru = bases.getGroupedRru()
+        
+        return RegionCellModel(
+            provider: provider,
+            region: region,
             settlementsCount: settlementsCount,
             baseStationsCount: basesCount,
             lastUpdated: lastUpdated,

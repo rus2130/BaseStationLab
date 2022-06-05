@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class StartViewModel: ObservableObject {
-    @Published var providerModels = [StartViewCellModel]()
+    @Published var providerModels = [StartCellModel]()
     
     private let database = Database()
     
@@ -32,7 +32,7 @@ class StartViewModel: ObservableObject {
         }
     }
     
-    private func createProviderModel(_ provider: Provider, bases: Results<BaseStation>) -> StartViewCellModel? {
+    private func createProviderModel(_ provider: Provider, bases: Results<BaseStation>) -> StartCellModel? {
         guard provider != .invalid else { return nil }
         
         let filteredBases = bases.filteredBy(

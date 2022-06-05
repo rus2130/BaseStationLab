@@ -36,8 +36,20 @@ extension Results where Element: BaseStation {
         Provider(rawValue: self.first?.freqIn ?? "") ?? .invalid
     }
     
+    func getRegion() -> String {
+        self.first?.region ?? ""
+    }
+    
     func getAvailableProviders() -> [Provider] {
         let providers = Set(self.value(forKey: "freqIn") as? [String] ?? [])
         return providers.map { Provider(rawValue: $0) ?? .invalid }
+    }
+    
+    func getAvailableRegions() -> [String] {
+        Array(Set(self.value(forKey: "region") as? [String] ?? []))
+    }
+    
+    func getAvailableSettlements() -> [String] {
+        Array(Set(self.value(forKey: "settlement") as? [String] ?? []))
     }
 }
