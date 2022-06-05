@@ -19,7 +19,7 @@ struct StartView: View {
             }
             regionsNavigation
         }
-        .navigationTitle(viewModel.currentTechology.rawValueo)
+        .navigationTitle(viewModel.currentTechology.rawValue)
         .toolbar { toolbarComparison }
         .animation(.easeIn, value: viewModel.providerModels)
     }
