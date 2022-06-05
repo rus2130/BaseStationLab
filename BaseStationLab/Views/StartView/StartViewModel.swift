@@ -49,6 +49,11 @@ class StartViewModel: ObservableObject {
         }
     }
     
+    public func getNavigationTitle() -> String {
+        guard currentDetailTechnolody != .all else { return currentTechology.rawValue }
+        return currentDetailTechnolody.title
+    }
+    
     private func createProviderModel(_ provider: Provider, bases: Results<BaseStation>) -> StartCellModel? {
         guard provider != .invalid else { return nil }
         

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 class NavigationController: ObservableObject {
     static var shared = NavigationController()

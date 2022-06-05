@@ -19,7 +19,7 @@ struct StartView: View {
             }
             regionsNavigation
         }
-        .navigationTitle(viewModel.currentTechology.rawValue)
+        .navigationTitle(viewModel.getNavigationTitle())
         .toolbar { toolbarComparison }
         .overlay(filterSheet)
         .animation(.easeIn, value: viewModel.providerModels)
