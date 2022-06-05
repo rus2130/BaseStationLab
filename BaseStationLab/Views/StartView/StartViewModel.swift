@@ -35,9 +35,10 @@ class StartViewModel: ObservableObject {
     private func createProviderModel(_ provider: Provider, bases: Results<BaseStation>) -> StartViewCellModel? {
         guard provider != .invalid else { return nil }
         
-        let filteredBases = bases.filteredBy(provider: provider.rawValue)
-        
-        print(filteredBases.count)
+        let filteredBases = bases.filteredBy(
+            provider: provider.rawValue,
+            technology: Technolody.lte.filterValue
+        )
         
         let cellModel = DataMapper.basesToStartViewCellModel(bases: filteredBases)
         
