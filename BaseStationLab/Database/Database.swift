@@ -31,9 +31,16 @@ class Database {
     }
     
     public func getData(completion: @escaping (Results<BaseStation>)->()) {
-            Database.realmAsyncQueue.async {
-                let asyncRealm = try! Realm()
-                completion(asyncRealm.objects(BaseStation.self))
+        Database.realmAsyncQueue.async {
+            let asyncRealm = try! Realm()
+            completion(asyncRealm.objects(BaseStation.self))
+        }
+    }
+    
+    public func getBasesCount(completion: @escaping (Int) -> ()) {
+        Database.realmAsyncQueue.async {
+            let asyncRealm = try! Realm()
+            completion(asyncRealm.objects(BaseStation.self).count)
         }
     }
 }

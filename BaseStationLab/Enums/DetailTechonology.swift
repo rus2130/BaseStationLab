@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DetailTechology: String {
+enum DetailTechology: String, CaseIterable {
     case lte2600 = "LTE-2600"
     case lte1800 = "LTE-1800"
     case lte900 = "LTE-900"

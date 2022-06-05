@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Technolody: String {
+enum Technolody: String, CaseIterable {
     case lte, umts, gsm, all
     
     var detailTechologies: [DetailTechology] {

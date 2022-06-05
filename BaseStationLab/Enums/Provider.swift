@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum Provider: String {
+enum Provider: String, CaseIterable {
     case kyivstar, vodafone, lifecell 
 }

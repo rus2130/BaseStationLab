@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct BaseStationLabApp: App {
+    
+    init() {
+        BasesController().checkBasesStatus()
+    }
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
