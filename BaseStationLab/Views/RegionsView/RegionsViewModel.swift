@@ -44,17 +44,13 @@ class RegionsViewModel: ObservableObject {
             )
             
             let availableRegions = filteredBases.getAvailableRegions()
-            let preparedRegionModels = availableRegions
-                .compactMap { self.createRegionModel($0, bases: bases) }
-                .sorted(sortState: self.sortState)
             
-            DispatchQueue.main.async {
-                self.regionModels = preparedRegionModels
-            }
+            availableRegions
+                .forEach { self.createRegionModel($0, bases: bases) }
         }
     }
     
-    private func createRegionModel(_ region: String, bases: Results<BaseStation>) -> RegionCellModel {
+    private func createRegionModel(_ region: String, bases: Results<BaseStation>) {
         let filteredBases = bases.filteredBy(
             provider: filters.currentProviderFilter,
             technology: filters.currentTechnologyFilter,
@@ -63,6 +59,12 @@ class RegionsViewModel: ObservableObject {
         
         let cellModel = DataMapper.basesToRegionCellModel(bases: filteredBases)
         
-        return cellModel
+        DispatchQueue.main.async {
+            if let index = self.regionModels.firstIndex(where: { $0.region == cellModel.region }) {
+                self.regionModels[index] = cellModel
+            } else {
+                self.regionModels.append(cellModel)
+            }
+        }
     }
 }
