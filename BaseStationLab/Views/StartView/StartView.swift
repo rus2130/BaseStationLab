@@ -19,7 +19,7 @@ struct StartView: View {
             }
             regionsNavigation
         }
-        .navigationTitle("LTE")
+        .navigationTitle(viewModel.currentTechology.rawValueo)
         .toolbar { toolbarComparison }
         .animation(.easeIn, value: viewModel.providerModels)
     }
