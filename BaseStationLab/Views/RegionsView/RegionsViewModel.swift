@@ -18,6 +18,11 @@ class RegionsViewModel: ObservableObject {
         getRegions()
     }
     
+    public func updateDetailTechnolody(techolody: DetailTechology) {
+        NavigationController.shared.filters.update(detailTechnolody: techolody)
+        getRegions()
+    }
+    
     private func getRegions() {
         database.getBases { [weak self] bases in
             guard let self = self, !bases.isEmpty else { return }

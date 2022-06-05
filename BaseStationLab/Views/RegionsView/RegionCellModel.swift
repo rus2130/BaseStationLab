@@ -9,11 +9,7 @@ import Foundation
 
 struct RegionCellModel: Equatable, Identifiable, Hashable {
     var id: String {
-        provider.rawValue +
-        String(regionName) +
-        String(settlementsCount) +
-        String(baseStationsCount) +
-        String(rruNames.joined(separator: ""))
+        provider.rawValue + String(regionName)
     }
     
     var provider: Provider

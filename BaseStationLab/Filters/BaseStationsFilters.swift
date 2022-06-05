@@ -16,8 +16,8 @@ class BaseStationFilters: ObservableObject {
     var currentProviderFilter: String { currentProvider?.rawValue ?? "" }
     var currentRegionFilter: String { currentRegion ?? "" }
     var currentTechnologyFilter: String {
-        guard currentDetailTecholody != .all else { return currentDetailTecholody.rawValue }
-        return currentTechnolody.filterValue
+        guard currentDetailTecholody != .all else { return currentTechnolody.filterValue }
+        return currentDetailTecholody.rawValue
     }
     var currentDetailTecholodyFilter: String { currentDetailTecholody.rawValue }
     

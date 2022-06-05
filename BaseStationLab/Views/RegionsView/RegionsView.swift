@@ -16,7 +16,9 @@ struct RegionsView: View {
             regions
             settlementsNavigation
         }
+        .animation(.easeIn, value: viewModel.regionModels)
         .toolbar { toolbarSort }
+        .overlay(filterSheet)
     }
     
     private var regions: some View {
@@ -35,7 +37,7 @@ struct RegionsView: View {
     private var toolbarSort: some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button {
-                
+                navigationController.showingFilterActionSheet = true
             } label: {
                 Image(systemName: "arrow.up.arrow.down")
             }
@@ -51,6 +53,11 @@ struct RegionsView: View {
             },
             label: { EmptyView() }
         )
+    }
+    
+    private var filterSheet: some View {
+        ZStack {}
+            .overlay(FilterActionSheet(action: viewModel.updateDetailTechnolody))
     }
 }
 
