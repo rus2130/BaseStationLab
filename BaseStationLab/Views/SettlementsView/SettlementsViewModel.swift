@@ -12,6 +12,7 @@ class SettlementsViewModel: ObservableObject {
     @Published var settlementModels = [SettlementCellModel]()
     
     let database = Database()
+    let filters = NavigationController.shared.filters
     
     init() {
         getSettlements()
@@ -19,25 +20,27 @@ class SettlementsViewModel: ObservableObject {
     
     private func getSettlements() {
         database.getBases { bases in
-            let filteredBases = bases.filteredBy(provider: Provider.kyivstar.rawValue, technology: Technolody.lte.filterValue, region: "Волинська")
+            let filteredBases = bases.filteredBy(
+                provider: self.filters.currentProviderFilter,
+                technology: self.filters.currentTechnologyFilter,
+                region: self.filters.currentRegionFilter
+            )
             
             let availableSettlements = filteredBases.getAvailableSettlements()
             let preparedSettlementsModels = availableSettlements
-                .compactMap { self.createSettlementModel($0, region: "Волинська", bases: bases) }
-                .sorted { $0.baseStationsCount > $1.baseStationsCount }
+                .compactMap { self.createSettlementModel($0, bases: bases) }
             
             DispatchQueue.main.async {
-                print(preparedSettlementsModels.count)
                 self.settlementModels = preparedSettlementsModels
             }
         }
     }
     
-    private func createSettlementModel(_ settlement: String, region: String, bases: Results<BaseStation>) -> SettlementCellModel {
+    private func createSettlementModel(_ settlement: String, bases: Results<BaseStation>) -> SettlementCellModel {
         let filteredBases = bases.filteredBy(
-            provider: Provider.kyivstar.rawValue,
-            technology: Technolody.lte.filterValue,
-            region: region,
+            provider: filters.currentProviderFilter,
+            technology: filters.currentTechnologyFilter,
+            region: filters.currentRegionFilter,
             settlement: settlement
         )
         

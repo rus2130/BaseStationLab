@@ -23,7 +23,7 @@ struct RegionsView: View {
         LazyVStack(spacing: 12) {
             ForEach(viewModel.regionModels) { regionModel in
                 Button {
-                    navigationController.openSettlements()
+                    navigationController.openSettlements(region: regionModel.region)
                 } label: {
                     RegionViewCell(model: regionModel)
                 }

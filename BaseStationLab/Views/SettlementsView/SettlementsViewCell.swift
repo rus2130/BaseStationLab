@@ -12,7 +12,7 @@ struct SettlementsViewCell: View {
     
     var body: some View {
         card
-            .background(Color.blue)
+            .background(model.provider.backgroundColor)
             .cornerRadius(16)
             .shadow(color: .black.opacity(0.4), radius: 8, x: 0, y: 2)
     }

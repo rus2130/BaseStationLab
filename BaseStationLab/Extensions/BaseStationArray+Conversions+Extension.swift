@@ -50,10 +50,10 @@ extension Results where Element: BaseStation {
     }
     
     func getAvailableRegions() -> [String] {
-        Array(Set(self.value(forKey: "region") as? [String] ?? []))
+        Array(Set(self.value(forKey: "region") as? [String] ?? [])).sorted(by: { $0 < $1 })
     }
     
     func getAvailableSettlements() -> [String] {
-        Array(Set(self.value(forKey: "settlement") as? [String] ?? []))
+        Array(Set(self.value(forKey: "settlement") as? [String] ?? [])).sorted(by: { $0 < $1 })
     }
 }

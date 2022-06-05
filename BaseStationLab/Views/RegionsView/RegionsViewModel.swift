@@ -12,6 +12,7 @@ class RegionsViewModel: ObservableObject {
     @Published var regionModels = [RegionCellModel]()
     
     let database = Database()
+    let filters = NavigationController.shared.filters
     
     init() {
         getRegions()
@@ -20,11 +21,15 @@ class RegionsViewModel: ObservableObject {
     private func getRegions() {
         database.getBases { [weak self] bases in
             guard let self = self, !bases.isEmpty else { return }
-            let filteredBases = bases.filteredBy(provider: Provider.kyivstar.rawValue, technology: Technolody.lte.filterValue)
+            
+            let filteredBases = bases.filteredBy(
+                provider: self.filters.currentProviderFilter,
+                technology: self.filters.currentTechnologyFilter
+            )
+            
             let availableRegions = filteredBases.getAvailableRegions()
             let preparedRegionModels = availableRegions
                 .compactMap { self.createRegionModel($0, bases: bases) }
-                .sorted { $0.baseStationsCount > $1.baseStationsCount }
             
             DispatchQueue.main.async {
                 self.regionModels = preparedRegionModels
@@ -34,8 +39,8 @@ class RegionsViewModel: ObservableObject {
     
     private func createRegionModel(_ region: String, bases: Results<BaseStation>) -> RegionCellModel {
         let filteredBases = bases.filteredBy(
-            provider: Provider.kyivstar.rawValue,
-            technology: Technolody.lte.filterValue,
+            provider: filters.currentProviderFilter,
+            technology: filters.currentTechnologyFilter,
             region: region
         )
         

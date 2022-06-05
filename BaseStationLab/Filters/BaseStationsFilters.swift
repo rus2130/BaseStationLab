@@ -8,9 +8,13 @@
 import Foundation
 
 class BaseStationFilters: ObservableObject {
-    @Published var currentProvider: Provider?
-    @Published var currentRegion: String?
-    @Published var currentTechnolody: Technolody?
+    @Published private var currentProvider: Provider?
+    @Published private var currentRegion: String?
+    @Published private var currentTechnolody: Technolody?
+    
+    var currentProviderFilter: String { currentProvider?.rawValue ?? "" }
+    var currentRegionFilter: String { currentRegion ?? "" }
+    var currentTechnologyFilter: String { (currentTechnolody ?? .lte).filterValue }
     
     public func update(provider: Provider) {
         currentProvider = provider
