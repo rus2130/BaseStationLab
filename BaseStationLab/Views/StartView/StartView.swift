@@ -20,11 +20,6 @@ struct StartView: View {
         }
         .navigationTitle("LTE")
         .toolbar { toolbarComparison }
-        .onAppear {
-            Task {
-                _ = await BasesParser(detailTechology: .lte1800).startParse()
-            }
-        }
     }
     
     private var providers: some View {
