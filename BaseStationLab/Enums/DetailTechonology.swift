@@ -8,7 +8,10 @@
 import Foundation
 
 enum DetailTechology: String {
-    case lte2600, lte1800, lte900
-    case umts
-    case gsm1800, gsm900
+    case lte2600 = "LTE-2600"
+    case lte1800 = "LTE-1800"
+    case lte900 = "LTE-900"
+    case umts = "UMTS"
+    case gsm1800 = "GSM-1800"
+    case gsm900 = "GSM-900"
 }
