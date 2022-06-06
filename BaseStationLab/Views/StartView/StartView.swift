@@ -48,10 +48,10 @@ struct StartView: View {
     }
     
     private var filters: some View {
-        Picker("", selection: $viewModel.currentTechology) {
-            ForEach(Technolody.allCases) { techology in
-                Text(techology.rawValue)
-                    .tag(techology)
+        Picker("", selection: $viewModel.currentTechnolody) {
+            ForEach(Technolody.allCases) { technolody in
+                Text(technolody.rawValue)
+                    .tag(technolody)
             }
         }
         .pickerStyle(SegmentedPickerStyle())

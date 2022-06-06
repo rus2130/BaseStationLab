@@ -10,7 +10,7 @@ import SwiftUI
 struct FilterActionSheet: View {
     @StateObject private var navigationController = NavigationController.shared
     @Binding var isPresented: Bool
-    var action: (DetailTechology) -> ()
+    var action: (DetailTechnolody) -> ()
     
     var body: some View {
         ZStack{}
@@ -38,31 +38,31 @@ struct FilterActionSheet: View {
     
     private var lteButtons: [ActionSheet.Button] {
         [
-            .default(Text(DetailTechology.all.title)) { makeAction(.all) },
-            .default(Text(DetailTechology.lte2600.title)) { makeAction(.lte2600) },
-            .default(Text(DetailTechology.lte1800.title)) { makeAction(.lte1800) },
-            .default(Text(DetailTechology.lte900.title)) { makeAction(.lte900) },
+            .default(Text(DetailTechnolody.all.title)) { makeAction(.all) },
+            .default(Text(DetailTechnolody.lte2600.title)) { makeAction(.lte2600) },
+            .default(Text(DetailTechnolody.lte1800.title)) { makeAction(.lte1800) },
+            .default(Text(DetailTechnolody.lte900.title)) { makeAction(.lte900) },
             .destructive(Text("Скасувати"))
         ]
     }
     
     private var umtsButtons: [ActionSheet.Button] {
         [
-            .default(Text(DetailTechology.all.title)) { makeAction(.all) },
+            .default(Text(DetailTechnolody.all.title)) { makeAction(.all) },
             .destructive(Text("Скасувати"))
         ]
     }
     
     private var gsmButtons: [ActionSheet.Button] {
         [
-            .default(Text(DetailTechology.all.title)) { makeAction(.all) },
-            .default(Text(DetailTechology.gsm1800.title)) { makeAction(.gsm1800) },
-            .default(Text(DetailTechology.gsm900.title)) { makeAction(.gsm900) },
+            .default(Text(DetailTechnolody.all.title)) { makeAction(.all) },
+            .default(Text(DetailTechnolody.gsm1800.title)) { makeAction(.gsm1800) },
+            .default(Text(DetailTechnolody.gsm900.title)) { makeAction(.gsm900) },
             .destructive(Text("Скасувати"))
         ]
     }
     
-    private func makeAction(_ technolody: DetailTechology) {
+    private func makeAction(_ technolody: DetailTechnolody) {
         navigationController.filters.update(detailTechnolody: technolody)
         action(technolody)
     }

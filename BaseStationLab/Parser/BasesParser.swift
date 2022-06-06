@@ -8,7 +8,7 @@
 import Foundation
 
 class BasesParser {
-    private var technology: DetailTechology
+    private var technology: DetailTechnolody
     private var urlStart = "https://www.ucrf.gov.ua/ua/services/centralized-registries?permission_num=&region=&technology="
     private var urlEnd = "&search=&per_page=200&page="
     
@@ -16,8 +16,8 @@ class BasesParser {
     
     private var parserHelper = ParserHelper()
     
-    init(detailTechology: DetailTechology) {
-        self.technology = detailTechology
+    init(detailTechnolody: DetailTechnolody) {
+        self.technology = detailTechnolody
     }
     
     public func startParse() async -> [[String]] {

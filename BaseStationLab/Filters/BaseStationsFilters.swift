@@ -11,7 +11,7 @@ class BaseStationFilters: ObservableObject {
     @Published var currentProvider: Provider?
     @Published var currentRegion: String?
     @Published var currentTechnolody = Technolody.lte
-    @Published var currentDetailTecholody = DetailTechology.all
+    @Published var currentDetailTecholody = DetailTechnolody.all
     
     var currentProviderFilter: String { currentProvider?.rawValue ?? "" }
     var currentRegionFilter: String { currentRegion ?? "" }
@@ -33,7 +33,7 @@ class BaseStationFilters: ObservableObject {
         currentTechnolody = technolody
     }
     
-    public func update(detailTechnolody: DetailTechology) {
+    public func update(detailTechnolody: DetailTechnolody) {
         currentDetailTecholody = detailTechnolody
     }
 }

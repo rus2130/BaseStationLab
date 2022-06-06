@@ -22,7 +22,7 @@ class RegionsViewModel: ObservableObject {
         getRegions()
     }
     
-    public func updateDetailTechnolody(techolody: DetailTechology) {
+    public func updateDetailTechnolody(techolody: DetailTechnolody) {
         getRegions()
     }
     

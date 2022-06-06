@@ -24,7 +24,7 @@ enum Technolody: String, Identifiable, CaseIterable {
         }
     }
     
-    var detailTechologies: [DetailTechology] {
+    var detailTechologies: [DetailTechnolody] {
         switch self {
         case .lte: return [.lte2600, .lte1800, .lte900]
         case .umts: return [.umts]

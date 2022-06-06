@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DetailTechology: String, CaseIterable, Identifiable {
+enum DetailTechnolody: String, CaseIterable, Identifiable {
     var id: RawValue { rawValue }
     case all = "ALL"
     case lte2600 = "LTE-2600"

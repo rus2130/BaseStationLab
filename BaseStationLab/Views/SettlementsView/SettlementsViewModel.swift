@@ -21,7 +21,7 @@ class SettlementsViewModel: ObservableObject {
         getSettlements()
     }
     
-    public func updateDetailTechnolody(techolody: DetailTechology) {
+    public func updateDetailTechnolody(techolody: DetailTechnolody) {
         getSettlements()
     }
     

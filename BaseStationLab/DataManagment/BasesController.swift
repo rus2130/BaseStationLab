@@ -21,16 +21,16 @@ class BasesController {
     }
     
     private func startParse(completion: @escaping () -> ()) {
-        Task {
+        Task.detached(priority: .userInitiated) {
             var bases = [[String]]()
             
             for detailTechonoly in Technolody.all.detailTechologies {
-                let parser = BasesParser(detailTechology: detailTechonoly)
+                let parser = BasesParser(detailTechnolody: detailTechonoly)
                 
                 bases.append(contentsOf: await parser.startParse())
             }
             
-            updateDatabase(data: bases, completion: completion)
+            self.updateDatabase(data: bases, completion: completion)
         }
     }
     

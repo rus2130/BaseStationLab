@@ -10,22 +10,22 @@ import RealmSwift
 
 class StartViewModel: ObservableObject {
     @Published var providerModels = [StartCellModel]()
-    @Published var currentTechology = Technolody.lte { didSet {
+    @Published var currentTechnolody = Technolody.lte { didSet {
         updateCurrentTechnolody()
     }}
-    @Published var currentDetailTechnolody = DetailTechology.all
+    @Published var currentDetailTechnolody = DetailTechnolody.all
     @Published var showingFilterSheet = false
     @Published var isLoading = true
     
     private var currentTecholodyFilter: String {
-        guard currentDetailTechnolody != .all else { return currentTechology.filterValue }
+        guard currentDetailTechnolody != .all else { return currentTechnolody.filterValue }
         
         return currentDetailTechnolody.rawValue
     }
     
     private let database = Database()
     
-    public func updateDetailTechnolody(technolody: DetailTechology) {
+    public func updateDetailTechnolody(technolody: DetailTechnolody) {
         currentDetailTechnolody = technolody
         getProviderModels()
     }
@@ -50,7 +50,7 @@ class StartViewModel: ObservableObject {
     }
     
     public func getNavigationTitle() -> String {
-        guard currentDetailTechnolody != .all else { return currentTechology.rawValue }
+        guard currentDetailTechnolody != .all else { return currentTechnolody.rawValue }
         return currentDetailTechnolody.title
     }
     
@@ -68,7 +68,7 @@ class StartViewModel: ObservableObject {
     }
     
     private func updateCurrentTechnolody() {
-        NavigationController.shared.filters.update(technolody: currentTechology)
+        NavigationController.shared.filters.update(technolody: currentTechnolody)
         currentDetailTechnolody = .all
         getProviderModels()
     }
