@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-enum Provider: String, CaseIterable {
+enum Provider: String, CaseIterable, Identifiable {
+    var id: RawValue { rawValue }
     case kyivstar = "Kyivstar"
     case vodafone = "Vodafone"
     case lifecell = "Lifecell"

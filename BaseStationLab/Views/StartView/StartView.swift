@@ -14,9 +14,11 @@ struct StartView: View {
     
     var body: some View {
         ScrollView(.vertical) {
+            let isLoading = viewModel.isLoading
+            
             VStack(spacing: 24) {
                 filters
-                providers
+                isLoading ? AnyView(loadingState) : AnyView(providers)
             }
             regionsNavigation
         }
@@ -95,6 +97,26 @@ struct StartView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
+            }
+        }
+    }
+    
+    private var loadingState: some View {
+        LazyVStack(spacing: 16) {
+            ForEach(Provider.allCases) { provider in
+                StartViewCell(
+                    model: StartCellModel(
+                        provider: provider,
+                        regionsCount: 25,
+                        settlementsCount: 300,
+                        baseStationsCount: 10000,
+                        lastUpdated: Date(),
+                        rruNames: ["Huawei: 100"]
+                    )
+                )
+                .blur(radius: 8)
+                .shimmering()
+                .padding(.horizontal, 24)
             }
         }
     }
