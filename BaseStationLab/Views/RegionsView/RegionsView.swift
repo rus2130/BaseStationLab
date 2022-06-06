@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct RegionsView: View {
     @StateObject var navigationController = NavigationController.shared
@@ -33,6 +34,9 @@ struct RegionsView: View {
                     navigationController.openSettlements(region: regionModel.region)
                 } label: {
                     RegionViewCell(model: regionModel)
+                        .disabled(viewModel.isLoading)
+                        .blur(radius: viewModel.isLoading ? 8 : 0)
+                        .shimmering(active: viewModel.isLoading, duration: 1, bounce: false)
                 }
             }
         }

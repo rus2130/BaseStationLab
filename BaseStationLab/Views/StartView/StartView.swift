@@ -36,6 +36,8 @@ struct StartView: View {
                     navigationController.openRegions(provider: providerModel.provider)
                 } label: {
                     StartViewCell(model: providerModel)
+                        .disabled(viewModel.isLoading)
+                        .blur(radius: viewModel.isLoading ? 8 : 0)
                         .shimmering(active: viewModel.isLoading, duration: 1, bounce: false)
                 }
             }

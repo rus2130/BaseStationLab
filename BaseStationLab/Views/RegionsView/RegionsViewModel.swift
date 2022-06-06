@@ -12,6 +12,7 @@ class RegionsViewModel: ObservableObject {
     @Published var regionModels = [RegionCellModel]()
     @Published var showingFilterSheet = false
     @Published var showingSortSheet = false
+    @Published var isLoading = true
     
     let database = Database()
     let filters = NavigationController.shared.filters
@@ -35,6 +36,7 @@ class RegionsViewModel: ObservableObject {
     }
     
     private func getRegions() {
+        DispatchQueue.main.async { self.isLoading = true }
         database.getBases { [weak self] bases in
             guard let self = self, !bases.isEmpty else { return }
             
@@ -46,11 +48,19 @@ class RegionsViewModel: ObservableObject {
             let availableRegions = filteredBases.getAvailableRegions()
             
             availableRegions
-                .forEach { self.createRegionModel($0, bases: bases) }
+                .enumerated()
+                .forEach {
+                    self.createRegionModel(
+                        $0.element,
+                        index: $0.offset,
+                        totalCount: availableRegions.count,
+                        bases: bases
+                    )
+                }
         }
     }
     
-    private func createRegionModel(_ region: String, bases: Results<BaseStation>) {
+    private func createRegionModel(_ region: String, index: Int, totalCount: Int, bases: Results<BaseStation>) {
         let filteredBases = bases.filteredBy(
             provider: filters.currentProviderFilter,
             technology: filters.currentTechnologyFilter,
@@ -66,7 +76,10 @@ class RegionsViewModel: ObservableObject {
             } else {
                 self.regionModels.append(cellModel)
             }
-            self.regionModels.sort(sortState: self.sortState)
+            if index == totalCount - 1 {
+                self.regionModels.sort(sortState: self.sortState)
+                self.isLoading = false
+            }
         }
     }
 }
