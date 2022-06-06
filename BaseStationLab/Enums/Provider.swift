@@ -16,14 +16,10 @@ enum Provider: String, CaseIterable {
     
     var backgroundColor: Color {
         switch self {
-        case .kyivstar:
-            return .blue
-        case .vodafone:
-            return .red
-        case .lifecell:
-            return .purple
-        case .invalid:
-            return .white
+        case .kyivstar: return Color(red: 34/255, green: 159/255, blue: 255/255)
+        case .vodafone: return  Color(red: 230/255, green: 0, blue: 0)
+        case .lifecell: return Color(red: 31/255, green: 80/255, blue: 156/255)
+        case .invalid: return .white
         }
     }
 }
