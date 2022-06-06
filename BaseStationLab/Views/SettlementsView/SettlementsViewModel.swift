@@ -11,7 +11,7 @@ import RealmSwift
 class SettlementsViewModel: ObservableObject {
     @Published var settlementModels = [SettlementCellModel]()
     @Published var showingFilterActionSheet = false
-    @Published var showingSortSheet = false 
+    @Published var showingSortSheet = false
     
     let database = Database()
     let filters = NavigationController.shared.filters
@@ -48,11 +48,19 @@ class SettlementsViewModel: ObservableObject {
             let availableSettlements = filteredBases.getAvailableSettlements()
             
             availableSettlements
-                .forEach { self.createSettlementModel($0, bases: bases) }
+                .enumerated()
+                .forEach { index, element in
+                    self.createSettlementModel(
+                        element,
+                        index: index,
+                        totalCount: availableSettlements.count,
+                        bases: bases
+                    )
+                }
         }
     }
     
-    private func createSettlementModel(_ settlement: String, bases: Results<BaseStation>) {
+    private func createSettlementModel(_ settlement: String, index: Int, totalCount: Int, bases: Results<BaseStation>) {
         let filteredBases = bases.filteredBy(
             provider: filters.currentProviderFilter,
             technology: filters.currentTechnologyFilter,
@@ -70,7 +78,9 @@ class SettlementsViewModel: ObservableObject {
             } else {
                 self.settlementModels.append(cellModel)
             }
-            self.settlementModels.sort(sortState: self.sortState)
+            if index == totalCount - 1 {
+                self.settlementModels.sort(sortState: self.sortState)
+            }
         }
     }
 }

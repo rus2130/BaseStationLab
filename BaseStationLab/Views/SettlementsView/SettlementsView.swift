@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct SettlementsView: View {
     @StateObject var viewModel = SettlementsViewModel()
