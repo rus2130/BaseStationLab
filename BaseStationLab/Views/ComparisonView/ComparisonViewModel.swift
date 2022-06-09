@@ -29,8 +29,6 @@ class ComparisonViewModel: ObservableObject {
                 .compactMap { self.createComparisonModel($0, bases: bases) }
                 .sorted { $0.basesCount > $1.basesCount }
             
-            print(preparedComparisonModels)
-            
             DispatchQueue.main.async {
                 self.comparisonModels = preparedComparisonModels
                 self.isLoading = false
