@@ -14,6 +14,8 @@ class NavigationController: ObservableObject {
     @Published var showingFilterActionSheet = false 
     @Published var showingRegions = false
     @Published var showingSettlements = false
+    @Published var showingComparison = false
+    
     @Published var filters = BaseStationFilters()
     @Published var sortState = SortState.name
     
@@ -25,5 +27,9 @@ class NavigationController: ObservableObject {
     public func openSettlements(region: String) {
         filters.update(region: region)
         showingSettlements = true
+    }
+    
+    public func openComparison() {
+        showingComparison = true
     }
 }

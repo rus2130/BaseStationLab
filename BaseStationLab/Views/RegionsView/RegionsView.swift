@@ -72,6 +72,7 @@ struct RegionsView: View {
             destination: {
                 SettlementsView()
                     .frame(maxWidth: 500)
+                    .lazyView()
             },
             label: { EmptyView() }
         )

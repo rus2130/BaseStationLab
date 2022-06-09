@@ -21,6 +21,7 @@ struct StartView: View {
                 isLoading ? AnyView(loadingState) : AnyView(providers)
             }
             regionsNavigation
+            comparisonNavigation
         }
         .navigationTitle(viewModel.getNavigationTitle())
         .toolbar {
@@ -61,6 +62,7 @@ struct StartView: View {
     private var toolbarComparison: some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button {
+                navigationController.showingComparison = true 
             } label: {
                 Text("Порівняння")
             }
@@ -73,6 +75,19 @@ struct StartView: View {
             destination: {
                 RegionsView()
                     .frame(maxWidth: 500)
+                    .lazyView()
+            },
+            label: { EmptyView() }
+        )
+    }
+    
+    private var comparisonNavigation: some View {
+        NavigationLink(
+            isActive: $navigationController.showingComparison,
+            destination: {
+                ComparisonView()
+                    .frame(maxWidth: 500)
+                    .lazyView()
             },
             label: { EmptyView() }
         )
