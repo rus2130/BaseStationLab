@@ -11,7 +11,6 @@ import Combine
 class NavigationController: ObservableObject {
     static var shared = NavigationController()
     
-    @Published var showingFilterActionSheet = false 
     @Published var showingRegions = false
     @Published var showingSettlements = false
     @Published var filters = BaseStationFilters()
