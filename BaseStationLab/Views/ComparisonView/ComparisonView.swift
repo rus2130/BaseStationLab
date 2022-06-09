@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ComparisonView: View {
+    @StateObject var viewModel = ComparisonViewModel()
+    
     var body: some View {
         ScrollView(.vertical) {
             comparisonCells
@@ -16,6 +18,7 @@ struct ComparisonView: View {
             localityToolbar
         }
         .navigationTitle("Порівняння")
+        .overlay(selectionSheet)
     }
     
     private var comparisonCells: some View {
@@ -30,6 +33,7 @@ struct ComparisonView: View {
     private var localityToolbar: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) {
             Button {
+                viewModel.showingLocalitySelection = true
             } label: {
                 HStack {
                     Text("Україна")
@@ -38,6 +42,13 @@ struct ComparisonView: View {
                 .font(.system(size: 16, weight: .semibold))
             }
         }
+    }
+    
+    private var selectionSheet: some View {
+        ZStack{}
+            .sheet(isPresented: $viewModel.showingLocalitySelection) {
+                ComparisonSettlementSelectionView()
+            }
     }
 }
 

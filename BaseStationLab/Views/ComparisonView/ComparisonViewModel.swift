@@ -9,7 +9,7 @@ import Foundation
 
 class ComparisonViewModel: ObservableObject {
     @Published var comparisonModels = [ComparisonCellModel]()
-    
+    @Published var showingLocalitySelection = false 
     let database = Database()
     
 }
