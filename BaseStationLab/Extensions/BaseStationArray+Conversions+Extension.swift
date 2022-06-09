@@ -56,4 +56,18 @@ extension Results where Element: BaseStation {
     func getAvailableSettlements() -> [String] {
         Array(Set(self.value(forKey: "settlement") as? [String] ?? [])).sorted(by: { $0 < $1 })
     }
+    
+    func getTechnologiesCount() -> [Int: Int] {
+        let technologies = self.value(forKey: "radioTechnology") as? [String] ?? []
+        
+        let preparedTechnologies: [Int] = technologies.compactMap { technology in
+            if technology == "UMTS" {
+                return 2100
+            } else {
+                return Int(technology.digits)
+            }
+        }
+        
+        return Dictionary(grouping: preparedTechnologies) { $0 }.mapValues { $0.count }
+    }
 }

@@ -81,4 +81,33 @@ class DataMapper {
             rruNames: groupedRru
         )
     }
+    
+    static func basesToComparisonCellModel(bases: Results<BaseStation>) -> ComparisonCellModel {
+        let provider = bases.getProvider()
+        
+        let lteBases = bases.filteredBy(technology: Technolody.lte.filterValue)
+        let umtsBases = bases.filteredBy(technology: Technolody.umts.filterValue)
+        let gsmBases = bases.filteredBy(technology: Technolody.gsm.filterValue)
+        
+        let lteBasesCount = lteBases.count
+        let umtsBasesCount = umtsBases.count
+        let gsmBasesCount = gsmBases.count
+        
+        let basesCount = lteBasesCount + umtsBasesCount + gsmBasesCount
+        
+        let lteTechologiesCount = lteBases.getTechnologiesCount()
+        let umtsTechologiesCount = umtsBases.getTechnologiesCount()
+        let gsmTechologiesCount = gsmBases.getTechnologiesCount()
+        
+        return ComparisonCellModel(
+            provider: provider,
+            basesCount: basesCount,
+            lteBasesCount: lteBasesCount,
+            lteTechnologiesCount: lteTechologiesCount,
+            umtsBasesCount: umtsBasesCount,
+            umtsTechnologiesCount: umtsTechologiesCount,
+            gsmBasesCount: gsmBasesCount,
+            gsmTechnologiesCount: gsmTechologiesCount
+        )
+    }
 }

@@ -18,12 +18,7 @@ struct ComparisonCellModel {
     var umtsTechnologiesCount: [Int: Int]
     var gsmBasesCount: Int
     var gsmTechnologiesCount: [Int: Int]
-    
-    
-    var baseStationsCount: Int
-    var lastUpdated: Date
-    var rruNames: [String]
-    
+        
     var providerString: String { provider.rawValue }
     
 }
