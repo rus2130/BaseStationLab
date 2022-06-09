@@ -12,6 +12,9 @@ struct ComparisonView: View {
         ScrollView(.vertical) {
             comparisonCells
         }
+        .toolbar {
+            localityToolbar
+        }
         .navigationTitle("Порівняння")
     }
     
@@ -22,6 +25,19 @@ struct ComparisonView: View {
             }
         }
         .padding(.horizontal, 24)
+    }
+    
+    private var localityToolbar: some ToolbarContent {
+        ToolbarItem(placement: .primaryAction) {
+            Button {
+            } label: {
+                HStack {
+                    Text("Україна")
+                    Image(systemName: "chevron.down")
+                }
+                .font(.system(size: 16, weight: .semibold))
+            }
+        }
     }
 }
 
