@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import RealmSwift
 
 class ComparisonViewModel: ObservableObject {
     @Published var comparisonModels = [ComparisonCellModel]()
-    @Published var showingLocalitySelection = false 
+    @Published var showingLocalitySelection = false
+    @Published var isLoading = false
+    
     let database = Database()
     
     init() {
@@ -17,15 +20,34 @@ class ComparisonViewModel: ObservableObject {
     }
     
     public func getComparisonModels() {
+        isLoading = true
+        
         database.getBases { bases in
             let availableProviders = bases.getAvailableProviders()
             
-            availableProviders
-                .forEach { provider in
-                    let filteredBases = bases.filteredBy(provider: provider.rawValue)
-                    print(DataMapper.basesToComparisonCellModel(bases: filteredBases))
-                }
+            let preparedComparisonModels = availableProviders
+                .compactMap { self.createComparisonModel($0, bases: bases) }
+                .sorted { $0.basesCount > $1.basesCount }
+            
+            print(preparedComparisonModels)
+            
+            DispatchQueue.main.async {
+                self.comparisonModels = preparedComparisonModels
+                self.isLoading = false
+            }
         }
+    }
+    
+    private func createComparisonModel(_ provider: Provider, bases: Results<BaseStation>) -> ComparisonCellModel? {
+        guard provider != .invalid else { return nil }
+        
+        let filteredBases = bases.filteredBy(provider: provider.rawValue)
+        
+        guard !filteredBases.isEmpty else { return nil }
+        
+        let cellModel = DataMapper.basesToComparisonCellModel(bases: filteredBases)
+        
+        return cellModel
     }
     
 //    public func createComparisonModel(_ provider: Provider, bases: Result<BaseStation>) -> ComparisonCellModel? {

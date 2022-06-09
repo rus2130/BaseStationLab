@@ -75,7 +75,6 @@ struct StartView: View {
             destination: {
                 RegionsView()
                     .frame(maxWidth: 500)
-                    .lazyView()
             },
             label: { EmptyView() }
         )
@@ -87,7 +86,6 @@ struct StartView: View {
             destination: {
                 ComparisonView()
                     .frame(maxWidth: 500)
-                    .lazyView()
             },
             label: { EmptyView() }
         )
