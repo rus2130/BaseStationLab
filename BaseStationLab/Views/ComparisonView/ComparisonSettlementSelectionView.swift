@@ -21,8 +21,16 @@ struct ComparisonSettlementSelectionView: View {
                     }
                 }
             } header: {
-                TextField("", text: .constant("TEST"))
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                HStack {
+                    TextField("", text: .constant("TEST"))
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Button {
+                        dismiss.callAsFunction()
+                    } label: {
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 16, weight: .semibold))
+                    }
+                }
             }
         }
         .listStyle(PlainListStyle())
