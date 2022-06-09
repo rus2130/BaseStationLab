@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shimmer
 
 struct ComparisonView: View {
     @StateObject var viewModel = ComparisonViewModel()
@@ -19,12 +20,19 @@ struct ComparisonView: View {
         }
         .navigationTitle("Порівняння")
         .overlay(selectionSheet)
+        .animation(.easeIn, value: viewModel.isLoading)
     }
     
     private var comparisonCells: some View {
-        LazyVStack(spacing: 16) {
-            ForEach(0..<3) { _ in
-                ComparisonCellView()
+        ZStack {
+            if viewModel.isLoading {
+                loadingState
+            } else {
+                LazyVStack(spacing: 16) {
+                    ForEach(viewModel.comparisonModels) { model in
+                        ComparisonCellView(model: model)
+                    }
+                }
             }
         }
         .padding(.horizontal, 24)
@@ -49,6 +57,27 @@ struct ComparisonView: View {
             .sheet(isPresented: $viewModel.showingLocalitySelection) {
                 ComparisonSettlementSelectionView()
             }
+    }
+    
+    private var loadingState: some View {
+        LazyVStack(spacing: 16) {
+            ForEach(Provider.allCases) { provider in
+                ComparisonCellView(
+                    model: ComparisonCellModel(
+                        provider: provider,
+                        basesCount: 10000,
+                        lteBasesCount: 10000,
+                        lteTechnologiesCount: [1000:1000],
+                        umtsBasesCount: 10000,
+                        umtsTechnologiesCount: [1000:1000],
+                        gsmBasesCount: 10000,
+                        gsmTechnologiesCount: [1000:1000]
+                    )
+                )
+                .blur(radius: 8)
+                .shimmering()
+            }
+        }
     }
 }
 

@@ -14,3 +14,9 @@ extension String {
         return formatter.date(from: self) ?? Date() 
     }
 }
+
+extension RangeReplaceableCollection where Self: StringProtocol {
+    var digits: Self {
+        return filter(("0"..."9").contains)
+    }
+}

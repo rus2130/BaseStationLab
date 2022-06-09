@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct ComparisonCellView: View {
+    var model: ComparisonCellModel
+    
     var body: some View {
         card
-            .background(Provider.kyivstar.backgroundColor)
+            .background(model.provider.backgroundColor)
             .cornerRadius(16)
             .shadow(color: .black.opacity(0.4), radius: 8, x: 0, y: 2)
     }
     
     private var card: some View {
         VStack(spacing: 24) {
-            HStack(spacing: 24) {
+            HStack(alignment: .top, spacing: 48) {
                 lteSection
                 umtsSection
             }
@@ -30,45 +32,53 @@ struct ComparisonCellView: View {
     }
     
     private var providerName: some View {
-        Text("Kyivstar")
+        Text(model.providerString)
             .font(.system(size: 20, weight: .bold))
     }
     
     private var basesCount: some View {
-        Text("18958")
+        Text(model.basesCountString)
             .font(.system(size: 20, weight: .bold))
     }
     
     private var lteSection: some View {
-        VStack(spacing: 4) {
-            technologyBasesCount()
-            techologiesBasesCount()
+        VStack(spacing: 24) {
+            providerName
+            VStack(spacing: 4) {
+                technologyBasesCount(title: "LTE", count: model.lteBasesCountString)
+                techologiesBasesCount(technologiesCount: model.sortedLteTechnologies)
+            }
         }
     }
     
     private var umtsSection: some View {
-        VStack(spacing: 4) {
-            technologyBasesCount()
-            techologiesBasesCount()
+        VStack(spacing: 24) {
+            basesCount
+            VStack(spacing: 4) {
+                technologyBasesCount(title: "UMTS", count: model.umtsBasesCountString)
+                techologiesBasesCount(technologiesCount: model.sortedUmtsTechnologies)
+            }
         }
     }
     
     private var gsmSection: some View {
         VStack(spacing: 4) {
-            technologyBasesCount()
-            techologiesBasesCount()
+            technologyBasesCount(title: "GSM", count: model.gsmBasesCountString)
+            techologiesBasesCount(technologiesCount: model.sortedGsmTechnologies)
         }
     }
     
-    private func technologyBasesCount() -> some View {
-        Text("LTE: 18959")
+    private func technologyBasesCount(title: String, count: String) -> some View {
+        Text("\(title): \(count)")
             .font(.system(size: 18, weight: .semibold))
     }
     
-    private func techologiesBasesCount() -> some View {
-        VStack(spacing: 0) {
-            ForEach(0..<3) { i in
-                Text("\(i): 3202")
+    private func techologiesBasesCount(technologiesCount: [(technology: String, count: String)]) -> some View {
+        VStack(spacing: 2) {
+            ForEach(technologiesCount, id: \.technology) { technologyCount in
+                Text("\(technologyCount.technology): ") +
+                Text(technologyCount.count)
+                    .font(.system(size: 16, weight: .semibold))
             }
         }
     }
@@ -76,6 +86,17 @@ struct ComparisonCellView: View {
 
 struct ComparisonCellView_Previews: PreviewProvider {
     static var previews: some View {
-        ComparisonCellView()
+        ComparisonCellView(
+            model: ComparisonCellModel(
+                provider: .kyivstar,
+                basesCount: 10000,
+                lteBasesCount: 10000,
+                lteTechnologiesCount: [1000:1000],
+                umtsBasesCount: 10000,
+                umtsTechnologiesCount: [1000:1000],
+                gsmBasesCount: 10000,
+                gsmTechnologiesCount: [1000:1000]
+            )
+        )
     }
 }
