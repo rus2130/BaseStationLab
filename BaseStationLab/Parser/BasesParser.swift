@@ -20,6 +20,12 @@ class BasesParser {
         self.technology = detailTechnolody
     }
     
+    public func pagesCount() async -> Int {
+        guard let url = getParseUrl(currentPage: 1) else { return 0 }
+        
+        return await parserHelper.parsePagesCount(url: url) ?? 0
+    }
+    
     public func startParse() async -> [[String]] {
         return await withCheckedContinuation { continuation in
             Task {
@@ -33,6 +39,7 @@ class BasesParser {
                     guard let currentURL = self.getParseUrl(currentPage: currentPage) else { return }
                     let bases = await self.parserHelper.parseBases(url: currentURL)
                     preparedBases.append(contentsOf: bases)
+                    LoadingState.shared.incrementParsedPages()
                     debugPrint("[Parser][\(self.technology.rawValue)] parsing: \(currentPage)")
                 }
                 

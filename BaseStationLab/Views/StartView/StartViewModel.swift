@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import Combine
 
 class StartViewModel: ObservableObject {
     @Published var providerModels = [StartCellModel]()
@@ -16,6 +17,10 @@ class StartViewModel: ObservableObject {
     @Published var currentDetailTechnolody = DetailTechnolody.all
     @Published var showingFilterSheet = false
     @Published var isLoading = true
+    @Published var loadingProgress = -1
+    
+    private let loadingState = LoadingState.shared
+    private var cancellables = Set<AnyCancellable>()
     
     private var currentTecholodyFilter: String {
         guard currentDetailTechnolody != .all else { return currentTechnolody.filterValue }
@@ -24,6 +29,10 @@ class StartViewModel: ObservableObject {
     }
     
     private let database = Database()
+    
+    init() {
+        setupLoading()
+    }
     
     public func updateDetailTechnolody(technolody: DetailTechnolody) {
         currentDetailTechnolody = technolody
@@ -50,6 +59,9 @@ class StartViewModel: ObservableObject {
     }
     
     public func getNavigationTitle() -> String {
+        guard loadingProgress == -1 || loadingProgress == 100 else {
+            return "Завантаженя... \(loadingProgress)%"
+        }
         guard currentDetailTechnolody != .all else { return currentTechnolody.rawValue }
         return currentDetailTechnolody.title
     }
@@ -71,5 +83,11 @@ class StartViewModel: ObservableObject {
         NavigationController.shared.filters.update(technolody: currentTechnolody)
         currentDetailTechnolody = .all
         getProviderModels()
+    }
+    
+    private func setupLoading() {
+        loadingState.$loadingProgress
+            .assign(to: \.loadingProgress, on: self)
+            .store(in: &cancellables)
     }
 }
