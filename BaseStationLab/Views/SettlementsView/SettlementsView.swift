@@ -28,7 +28,7 @@ struct SettlementsView: View {
     private var settlements: some View {
         LazyVStack(spacing: 12) {
             ForEach(viewModel.settlementModels) { settlementModel in
-                SettlementsViewCell(model: settlementModel)
+                SettlementsCellView(model: settlementModel)
             }
         }
         .padding(24)

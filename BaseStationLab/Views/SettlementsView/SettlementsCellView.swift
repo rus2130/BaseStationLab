@@ -1,5 +1,5 @@
 //
-//  SettlementsViewCell.swift
+//  SettlementsCellView.swift
 //  BaseStationLab
 //
 //  Created by Ruslan Duda on 05.06.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettlementsViewCell: View {
+struct SettlementsCellView: View {
     var model: SettlementCellModel
     
     var body: some View {
@@ -53,7 +53,7 @@ struct SettlementsViewCell: View {
 
 struct SettlementsViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        SettlementsViewCell(
+        SettlementsCellView(
             model: .init(
                 provider: Provider.kyivstar,
                 region: "Волинська",

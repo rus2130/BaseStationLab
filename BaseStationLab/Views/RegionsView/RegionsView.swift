@@ -33,7 +33,7 @@ struct RegionsView: View {
                 Button {
                     navigationController.openSettlements(region: regionModel.region)
                 } label: {
-                    RegionViewCell(model: regionModel)
+                    RegionCellView(model: regionModel)
                         .disabled(viewModel.isLoading)
                         .blur(radius: viewModel.isLoading ? 8 : 0)
                         .shimmering(active: viewModel.isLoading, duration: 1, bounce: false)

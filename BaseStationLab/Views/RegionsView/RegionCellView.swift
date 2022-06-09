@@ -1,5 +1,5 @@
 //
-//  RegionsViewCell.swift
+//  RegionCellView.swift
 //  BaseStationLab
 //
 //  Created by Ruslan Duda on 05.06.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RegionViewCell: View {
+struct RegionCellView: View {
     var model: RegionCellModel
     
     var body: some View {
@@ -64,7 +64,7 @@ struct RegionViewCell: View {
 
 struct RegionsViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        RegionViewCell(
+        RegionCellView(
             model: .init(
                 provider: .kyivstar,
                 region: "Київ",

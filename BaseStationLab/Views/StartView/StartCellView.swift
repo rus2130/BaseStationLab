@@ -1,5 +1,5 @@
 //
-//  StartViewCell.swift
+//  StartCellView.swift
 //  BaseStationLab
 //
 //  Created by Ruslan Duda on 05.06.2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StartViewCell: View {
+struct StartCellView: View {
     var model: StartCellModel
     
     var body: some View {
@@ -90,7 +90,7 @@ struct StartViewCell: View {
 
 struct StartViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        StartViewCell(
+        StartCellView(
             model: StartCellModel(
                 provider: .kyivstar,
                 regionsCount: 25,

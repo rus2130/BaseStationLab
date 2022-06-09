@@ -37,7 +37,7 @@ struct StartView: View {
                 Button {
                     navigationController.openRegions(provider: providerModel.provider)
                 } label: {
-                    StartViewCell(model: providerModel)
+                    StartCellView(model: providerModel)
                         .disabled(viewModel.isLoading)
                         .blur(radius: viewModel.isLoading ? 8 : 0)
                         .shimmering(active: viewModel.isLoading, duration: 1, bounce: false)
@@ -104,7 +104,7 @@ struct StartView: View {
     private var loadingState: some View {
         LazyVStack(spacing: 16) {
             ForEach(Provider.allCases) { provider in
-                StartViewCell(
+                StartCellView(
                     model: StartCellModel(
                         provider: provider,
                         regionsCount: 25,
