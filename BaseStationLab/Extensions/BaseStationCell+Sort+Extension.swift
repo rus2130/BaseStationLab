@@ -11,7 +11,7 @@ extension Array where Element == RegionCellModel {
     mutating func sort(sortState: SortState) {
         self.sort { lhs, rhs in
             switch sortState {
-            case .name: return lhs.region < rhs.region
+            case .name: return locationSorted(lhs: lhs.region, rhs: rhs.region)
             case .basesCount: return lhs.baseStationsCount > rhs.baseStationsCount
             case .date: return lhs.lastUpdated > rhs.lastUpdated
             }
@@ -43,7 +43,7 @@ extension Array where Element == SettlementCellModel {
     func sorted(sortState: SortState) -> [SettlementCellModel] {
         self.sorted { lhs, rhs in
             switch sortState {
-            case .name: return lhs.settlement < rhs.settlement
+            case .name: return locationSorted(lhs: lhs.settlement, rhs: rhs.settlement)
             case .basesCount: return lhs.baseStationsCount > rhs.baseStationsCount
             case .date: return lhs.lastUpdated > rhs.lastUpdated
             }

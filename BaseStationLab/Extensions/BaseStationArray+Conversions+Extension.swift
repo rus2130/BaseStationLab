@@ -50,11 +50,11 @@ extension Results where Element: BaseStation {
     }
     
     func getAvailableRegions() -> [String] {
-        Array(Set(self.value(forKey: "region") as? [String] ?? [])).sorted(by: { $0 < $1 })
+        Array(Set(self.value(forKey: "region") as? [String] ?? [])).sorted(by: locationSorted)
     }
     
     func getAvailableSettlements() -> [String] {
-        Array(Set(self.value(forKey: "settlement") as? [String] ?? [])).sorted(by: { $0 < $1 })
+        Array(Set(self.value(forKey: "settlement") as? [String] ?? [])).sorted(by: locationSorted)
     }
     
     func getTechnologiesCount() -> [Int: Int] {
@@ -69,5 +69,14 @@ extension Results where Element: BaseStation {
         }
         
         return Dictionary(grouping: preparedTechnologies) { $0 }.mapValues { $0.count }
+    }
+    
+    func getAvailableRegionsAndSettlements() -> [(region: String, settlement: String)] {
+        let distinctBases = Array(self.distinct(by: ["region", "settlement"]))
+        var reducedBases = distinctBases
+            .map { (region: $0.region, settlement: $0.settlement) }
+            .sorted { locationSorted(lhs: $0.settlement, rhs: $1.settlement) }
+        
+        return reducedBases
     }
 }
