@@ -44,7 +44,7 @@ struct ComparisonView: View {
                 viewModel.showingLocalitySelection = true
             } label: {
                 HStack {
-                    let currentSearchModel = viewModel.currentLocalitySearch
+                    let currentSearchModel = viewModel.currentSearchModel
                     let title = currentSearchModel == nil ? "Україна" : (currentSearchModel?.settlement ?? "")
                     Text(title)
                     Image(systemName: "chevron.down")
@@ -57,7 +57,7 @@ struct ComparisonView: View {
     private var selectionSheet: some View {
         ZStack{}
             .sheet(isPresented: $viewModel.showingLocalitySelection) {
-                ComparisonSettlementSelectionView(currentSearchModel: $viewModel.currentLocalitySearch)
+                ComparisonSettlementSelectionView(currentSearchModel: $viewModel.currentSearchModel)
             }
     }
     

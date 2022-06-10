@@ -86,7 +86,7 @@ struct SettlementsView: View {
         NavigationLink(
             isActive: $viewModel.showingComparison,
             destination: {
-                ComparisonView(viewModel: .init(currentLocalitySearch: viewModel.currentComparisonModel))
+                ComparisonView(viewModel: .init(currentLocalitySearch: viewModel.currentSearchModel))
                     .frame(maxWidth: 500)
             },
             label: { EmptyView() }
