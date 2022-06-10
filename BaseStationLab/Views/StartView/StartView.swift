@@ -84,7 +84,7 @@ struct StartView: View {
         NavigationLink(
             isActive: $navigationController.showingComparison,
             destination: {
-                ComparisonView()
+                ComparisonView(viewModel: .init())
                     .frame(maxWidth: 500)
             },
             label: { EmptyView() }

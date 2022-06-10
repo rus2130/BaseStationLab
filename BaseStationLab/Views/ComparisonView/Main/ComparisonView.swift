@@ -9,7 +9,7 @@ import SwiftUI
 import Shimmer
 
 struct ComparisonView: View {
-    @StateObject var viewModel = ComparisonViewModel()
+    @StateObject var viewModel: ComparisonViewModel
     
     var body: some View {
         ScrollView(.vertical) {
@@ -44,7 +44,9 @@ struct ComparisonView: View {
                 viewModel.showingLocalitySelection = true
             } label: {
                 HStack {
-                    Text("Україна")
+                    let currentSearchModel = viewModel.currentLocalitySearch
+                    let title = currentSearchModel == nil ? "Україна" : (currentSearchModel?.settlement ?? "")
+                    Text(title)
                     Image(systemName: "chevron.down")
                 }
                 .font(.system(size: 16, weight: .semibold))
@@ -55,7 +57,7 @@ struct ComparisonView: View {
     private var selectionSheet: some View {
         ZStack{}
             .sheet(isPresented: $viewModel.showingLocalitySelection) {
-                ComparisonSettlementSelectionView()
+                ComparisonSettlementSelectionView(currentSearchModel: $viewModel.currentLocalitySearch)
             }
     }
     
@@ -84,7 +86,7 @@ struct ComparisonView: View {
 struct ComparisonView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ComparisonView()
+            ComparisonView(viewModel: .init())
         }
     }
 }

@@ -14,6 +14,7 @@ struct SettlementsView: View {
     var body: some View {
         ScrollView(.vertical) {
             settlements
+            comparisonNavigation
         }
         .toolbar {
             toolbarSort
@@ -28,7 +29,11 @@ struct SettlementsView: View {
     private var settlements: some View {
         LazyVStack(spacing: 12) {
             ForEach(viewModel.settlementModels) { settlementModel in
-                SettlementsCellView(model: settlementModel)
+                Button {
+                    viewModel.openComparison(model: settlementModel)
+                } label: {
+                    SettlementsCellView(model: settlementModel)
+                }
             }
         }
         .padding(24)
@@ -75,6 +80,17 @@ struct SettlementsView: View {
                     action: viewModel.updateSortState
                 )
             )
+    }
+    
+    private var comparisonNavigation: some View {
+        NavigationLink(
+            isActive: $viewModel.showingComparison,
+            destination: {
+                ComparisonView(viewModel: .init(currentLocalitySearch: viewModel.currentComparisonModel))
+                    .frame(maxWidth: 500)
+            },
+            label: { EmptyView() }
+        )
     }
 }
 

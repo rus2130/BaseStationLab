@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ComparisonSettlementSelectionView: View {
+    @Environment(\.dismiss) var dismiss
+    
     @StateObject private var viewModel = ComparisonSettlementSelectionViewModel()
     
-    @Environment(\.dismiss) var dismiss
+    @Binding var currentSearchModel: SettlementSearchModel?
     
     var body: some View {
         List {
@@ -32,6 +34,7 @@ struct ComparisonSettlementSelectionView: View {
     
     private func locationCell(_ model: SettlementSearchModel) -> some View {
         Button {
+            currentSearchModel = model
             dismiss.callAsFunction()
         } label: {
             HStack {
@@ -57,6 +60,7 @@ struct ComparisonSettlementSelectionView: View {
     
     private var resetButton: some View {
         Button {
+            currentSearchModel = nil 
             dismiss.callAsFunction()
         } label: {
             Text("Скинути")
@@ -75,6 +79,6 @@ struct ComparisonSettlementSelectionView: View {
 
 struct ComparisonSettlementSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ComparisonSettlementSelectionView()
+        ComparisonSettlementSelectionView(currentSearchModel: .constant(nil))
     }
 }

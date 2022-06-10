@@ -7,26 +7,38 @@
 
 import Foundation
 import RealmSwift
+import Combine
 
 class ComparisonViewModel: ObservableObject {
     @Published var comparisonModels = [ComparisonCellModel]()
     @Published var showingLocalitySelection = false
     @Published var isLoading = false
     
-    let database = Database()
+    @Published var currentLocalitySearch: SettlementSearchModel?
     
-    init() {
+    private var cancellables = Set<AnyCancellable>()
+    private let database = Database()
+    
+    init(currentLocalitySearch: SettlementSearchModel? = nil) {
+        self.currentLocalitySearch = currentLocalitySearch
         getComparisonModels()
+        setupSearch()
     }
     
     public func getComparisonModels() {
         isLoading = true
         
         database.getBases { bases in
-            let availableProviders = bases.getAvailableProviders()
+            var filteredBases = bases
+            
+            if let currentLocalitySearch = self.currentLocalitySearch {
+                filteredBases = bases.filteredBy(region: currentLocalitySearch.region, settlement: currentLocalitySearch.settlement)
+            }
+            
+            let availableProviders = filteredBases.getAvailableProviders()
             
             let preparedComparisonModels = availableProviders
-                .compactMap { self.createComparisonModel($0, bases: bases) }
+                .compactMap { self.createComparisonModel($0, bases: filteredBases) }
                 .sorted { $0.basesCount > $1.basesCount }
             
             DispatchQueue.main.async {
@@ -46,5 +58,18 @@ class ComparisonViewModel: ObservableObject {
         let cellModel = DataMapper.basesToComparisonCellModel(bases: filteredBases)
         
         return cellModel
+    }
+    
+    private func setupSearch() {
+        $currentLocalitySearch
+            .dropFirst()
+            .removeDuplicates()
+            .sink { [weak self] search in
+                guard let self = self else { return }
+                
+                self.currentLocalitySearch = search
+                self.getComparisonModels()
+            }
+            .store(in: &cancellables)
     }
 }
