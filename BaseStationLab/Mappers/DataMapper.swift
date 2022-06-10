@@ -110,4 +110,8 @@ class DataMapper {
             gsmTechnologiesCount: gsmTechologiesCount
         )
     }
+    
+    static func locationSorted(lhs: String, rhs: String) -> Bool {
+        return lhs.compare(rhs, options: [.diacriticInsensitive, .caseInsensitive]) == .orderedAscending
+    }
 }
