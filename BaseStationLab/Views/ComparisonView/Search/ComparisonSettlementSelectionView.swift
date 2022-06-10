@@ -12,7 +12,7 @@ struct ComparisonSettlementSelectionView: View {
     
     @StateObject private var viewModel = ComparisonSettlementSelectionViewModel()
     
-    @Binding var currentSearchModel: SettlementSearchModel?
+    @Binding var currentSearchModel: ComparisonSearchModel?
     
     var body: some View {
         List {
@@ -32,7 +32,7 @@ struct ComparisonSettlementSelectionView: View {
         }
     }
     
-    private func locationCell(_ model: SettlementSearchModel) -> some View {
+    private func locationCell(_ model: ComparisonSearchModel) -> some View {
         Button {
             currentSearchModel = model
             dismiss.callAsFunction()

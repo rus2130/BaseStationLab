@@ -14,7 +14,7 @@ class SettlementsViewModel: ObservableObject {
     @Published var showingSortSheet = false
     
     @Published var showingComparison = false
-    @Published var currentComparisonModel: SettlementSearchModel?
+    @Published var currentSearchModel: ComparisonSearchModel?
     
     let database = Database()
     let filters = NavigationController.shared.filters
@@ -41,7 +41,7 @@ class SettlementsViewModel: ObservableObject {
     }
     
     public func openComparison(model: SettlementCellModel) {
-        currentComparisonModel = .init(region: model.region, settlement: model.settlement)
+        currentSearchModel = .init(region: model.region, settlement: model.settlement)
         showingComparison = true
     }
     

@@ -14,13 +14,13 @@ class ComparisonViewModel: ObservableObject {
     @Published var showingLocalitySelection = false
     @Published var isLoading = false
     
-    @Published var currentLocalitySearch: SettlementSearchModel?
+    @Published var currentSearchModel: ComparisonSearchModel?
     
     private var cancellables = Set<AnyCancellable>()
     private let database = Database()
     
-    init(currentLocalitySearch: SettlementSearchModel? = nil) {
-        self.currentLocalitySearch = currentLocalitySearch
+    init(currentLocalitySearch: ComparisonSearchModel? = nil) {
+        self.currentSearchModel = currentLocalitySearch
         getComparisonModels()
         setupSearch()
     }
@@ -31,7 +31,7 @@ class ComparisonViewModel: ObservableObject {
         database.getBases { bases in
             var filteredBases = bases
             
-            if let currentLocalitySearch = self.currentLocalitySearch {
+            if let currentLocalitySearch = self.currentSearchModel {
                 filteredBases = bases.filteredBy(region: currentLocalitySearch.region, settlement: currentLocalitySearch.settlement)
             }
             
@@ -61,13 +61,13 @@ class ComparisonViewModel: ObservableObject {
     }
     
     private func setupSearch() {
-        $currentLocalitySearch
+        $currentSearchModel
             .dropFirst()
             .removeDuplicates()
             .sink { [weak self] search in
                 guard let self = self else { return }
                 
-                self.currentLocalitySearch = search
+                self.currentSearchModel = search
                 self.getComparisonModels()
             }
             .store(in: &cancellables)

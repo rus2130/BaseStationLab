@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-class SettlementSearchModel: Identifiable, Equatable {
-    static func == (lhs: SettlementSearchModel, rhs: SettlementSearchModel) -> Bool {
+class ComparisonSearchModel: Identifiable, Equatable {
+    static func == (lhs: ComparisonSearchModel, rhs: ComparisonSearchModel) -> Bool {
         lhs.id == rhs.id
     }
     
@@ -33,9 +33,9 @@ class SettlementSearchModel: Identifiable, Equatable {
 
 class ComparisonSettlementSelectionViewModel: ObservableObject {
     @Published var searchText = ""
-    @Published var filteredSettlementSearchModels = [SettlementSearchModel]()
+    @Published var filteredSettlementSearchModels = [ComparisonSearchModel]()
     
-    private var settlementSearchModels = [SettlementSearchModel]()
+    private var settlementSearchModels = [ComparisonSearchModel]()
     private var cancellables = Set<AnyCancellable>()
     
     private let database = Database()
@@ -49,7 +49,7 @@ class ComparisonSettlementSelectionViewModel: ObservableObject {
         database.getBases { bases in
             self.settlementSearchModels = bases
                 .getAvailableRegionsAndSettlements()
-                .map { SettlementSearchModel(region: $0.region, settlement: $0.settlement) }
+                .map { ComparisonSearchModel(region: $0.region, settlement: $0.settlement) }
             DispatchQueue.main.async {
                 self.filteredSettlementSearchModels = Array(self.settlementSearchModels.prefix(1500))
             }
